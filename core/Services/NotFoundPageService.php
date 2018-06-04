@@ -20,9 +20,20 @@ class NotFoundPageService implements ServiceInterface
     public function register()
     {
         return function ($container) {
+            return function ($response) use ($container) {
+            
+            // return $container->response
+            // ->withStatus(404)
+            // ->withHeader('Content-Type', 'text/html')
+            // ->write('Page not found');
+            
+            
+            
             return $container->view->render($container->response->withStatus(404), '404notfound.twig', [
-                "myMagic" => "Let's roll"
+                "myMagic" => "Let's roll",
+                'userLogged' => $container->cookies->get('user'),
             ]);
         };
+    };
     }
 }
