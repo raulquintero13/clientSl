@@ -1,0 +1,203 @@
+{% extends 'Demo/Base.twig' %}
+
+{% block navigation %}
+    <li>
+<a href="{{ path_for('home')}}">Home</a>
+    </li>
+{% endblock %}
+
+{% block container %}
+    <style>
+        .tabla {
+            height: 500px;
+            background-color: white;
+            margin-left: 0;
+            margin-right: 0;
+
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+        }
+
+        body,
+        html {
+            height: 94%;
+            background-color: #555;
+            color: white;
+        }
+
+        .fill {
+            min-height: 100%;
+        }
+        @media screen and (max-width: 767px) {
+            .tabla {
+                height: 460px;
+                margin-left: 10px;
+                margin-right: 10px;
+                background-color: white;
+            }
+        }
+
+
+        .container-fluid {
+            margin-top: 30px;
+            background-color: #555;
+            color: white;
+        }
+        .container {
+            margin-top: 30px;
+            padding:0px;
+            margin:0px;
+            background-color: #f2f9e8;
+            color: white;
+            width:auto;
+        }
+        .bg-footer {
+            background-color: black;
+        }
+        .bottom-padding{
+            padding-top:30px;
+            padding-bottom:0px;
+        }
+        .buttons{
+            margin-top:10px;
+            padding: 1px;
+        }
+        .listproductos{
+            margin-top:-20px;
+        }
+    </style>
+
+    <div class="row content">
+<div class="col-sm-8">
+    <div class="tabla">
+        <div class="container fill">
+            <div id="detalleTicket" class="box-content nopadding" style="overflow-y:none;">
+                <table id="mytable2" class="table table-hover table-striped table-nomargin table-borderedeee ">
+                    <thead>
+                        <tr>
+                            <th style="background:lightgreen;color:#444444">Producto</th>
+                            <th class="hidden-480" style="background:lightgreen;color:#444444">Color y Talla</th>
+                            <th style="background:lightgreen;color:#444444">Precio</th>
+                            <th style="background:lightgreen;color:#444444">Total</th>
+                            <th style="background:lightgreen;color:#444444">&nbsp;</th>
+                            {# <th class='hidden-480' style="background:lightgreen;color:#444444">&nbsp;</th> #}
+                        </tr>
+                    </thead>
+                    </table>
+            </div>
+            <div id="detalleTicket" class="box-content nopadding listproductos" style="overflow-y:scroll;">
+                <table id="mytable" class="table table-hover table-striped table-nomargin table-borderedeee ">
+            
+                        <tbody id="products">
+                        
+                           <tr>
+                        <td align=left><font color=black>23232<br>
+                            Pantalon Levi's Skinny</font></td>
+                        <td>
+                            <font color=black>Azul<br>30x32</font>
+                        </td>
+                        <td align="right">
+                        
+                        </td>
+                        <td align="center"><font color=black>100.00</font></td>
+                        <td align="right">
+                        <font color=black>600.00</font>
+                            {# <a class='visible-480' href="/cart/clearitem/<?php echo $producto['codigo'] ?>/pos">
+                                <button class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </a> #}
+                        </td>
+                        <td class='hidden-480'>
+                            <a class="hidden-print" href="/cart/clearitem/<?php echo $producto['codigo'] ?>/pos">
+                                <button class="btn btn-danger">
+                                    <i class="fa fa-trash-o">x</i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                   
+
+                        </tbody>
+                    </table>
+                        <div id="bottomTicket" ><br><br><br></div>
+            </div><br>
+        </div> <!-- This one wants to be 100% height -->
+    </div>
+{# </div> #}
+    <div class="buttons hidden-xs">
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+
+    </div>
+</div>
+        <div class="col-sm-4 text-left datar">
+
+            <h4>Juan Antonio<br>Martinez Lopez</h4>
+            <hr>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <h3>subTotal</h3>
+                    </td>
+                    <td align="right">
+                        <h3>1090.90</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>Envio</h3>
+                    </td>
+                    <td align="right">
+                        <h3>0.00</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3>Impuesto</h3>
+                    </td>
+                    <td align="right">
+                        <h3>109.10</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h2>Total</h2>
+                    </td>
+                    <td align="right">
+                        <h1>$ 1200.00</h1>
+                    </td>
+                </tr>
+            </table>
+
+            <hr>
+            <button type="button" class="btn btn-warning btn-lg btn-block">Pagar EFECTIVO</button>
+            
+
+            <hr>
+            <h1>welcome</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+Capture Codigo
+    {# <label for="inputdefault">Default input</label> #}
+    <input id="id" class="form-control" id="inputdefault" type="text">
+        
+<script src="/assets/js/main.js"></script>
+{% endblock %}

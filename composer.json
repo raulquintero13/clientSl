@@ -1,0 +1,42 @@
+{
+  "name": "raulquintero13/slim3-base",
+  "type": "library",
+  "license": "MIT",
+  "description": "PHP Slim Framework v3.5",
+  "keywords": [
+    "PHP",
+    "Slim"
+  ],
+  "homepage": "https://github.com/ricardoper",
+  "authors": [
+    {
+      "name": "Raul Quintero",
+      "email": "raulquintero13@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "slim/slim": "^3.5",
+    "slim/twig-view": "^2.1",
+    "slim/flash": "^0.1.0",
+    "vlucas/phpdotenv": "^2.4",
+    "symfony/var-dumper": "^3.1",
+    "monolog/monolog": "^1.21",
+    "guzzlehttp/guzzle": "^6.3",
+    "dflydev/fig-cookies": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Api\\": "api/",
+      "Apigw\\": "apigw/",
+      "App\\": "app/",
+      "Core\\": "core/"
+    },
+    "files": [
+      "bootstrap/helpers.php"
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.1"
+  }
+}
