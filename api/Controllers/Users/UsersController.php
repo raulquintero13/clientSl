@@ -15,7 +15,10 @@ class UsersController extends ControllerAbstract
       $users = require 'users.php';
       $users = array_merge($users['0']['data'],$users['10']['data']);
 
+
+
       $id =$request->getParam('user');
+      if(isset($users[$id])){
       $user = [
         'firstname' => $users[$id][0],
         'lastname' => $users[$id][1],
@@ -25,7 +28,7 @@ class UsersController extends ControllerAbstract
         'salary' => $users[$id][5],
 
       ];
-      
+    }
       // ToDo enable for production  /////
       // $User->set($user);      
       // $user = $User->toArray();

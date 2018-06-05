@@ -32,6 +32,13 @@ class UsersController extends ControllerAbstract
         
         $edited = $request->getParam('edit');
 
+        if (!$user){
+            $flash->addMessage('edited','El Registro no existe');
+            return $response->withRedirect($router->pathFor('users'));
+
+        }
+
+
         if($edited){
             $flash->addMessage('edited','El Registro fue actualizado');
             return $response->withRedirect($router->pathFor('users'));
