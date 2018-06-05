@@ -33,6 +33,17 @@ $(document).ready(function() {
 </script>
 {% endblock %}
 {% block container %}
+
+{% if messages.edited is defined %}
+    {% for message in messages.edited %}
+<div class="alert  alert-success " >
+{{message}}
+
+    </div>
+    {% endfor %}
+{% endif %}
+
+
     <div class="row content">
      
         <div class="col-sm-12 text-left">

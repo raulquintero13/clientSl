@@ -17,6 +17,10 @@ class UsersController extends ControllerAbstract
      */
     public function getUserById($id)
     {
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+        $router = $this->getRouter();
+        $flash = $this->getService('flash');
         $params = ['user'=>$id];
 
         try {
@@ -26,14 +30,20 @@ class UsersController extends ControllerAbstract
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
         }
         
-        
-        // var_dump($user);die;
-        return $this->render('Demo/user.twig', [
-            'title' => $this->title,
-            'menuActive' => $this->menuActive,
-            'userLogged' => $this->container->cookies->get('user'),
-            'user' => $user
-        ]);
+        $edited = $request->getParam('edit');
+
+        if($edited){
+            $flash->addMessage('edited','El Registro fue actualizado');
+            return $response->withRedirect($router->pathFor('users'));
+        }else{
+            // var_dump($request->getParam('edit'));die;
+            return $this->render('Demo/user.twig', [
+                'title' => $this->title,
+                'menuActive' => $this->menuActive,
+                'userLogged' => $this->container->cookies->get('user'),
+                'user' => $user
+            ]);
+        }
     }
 
     /**
@@ -49,11 +59,14 @@ class UsersController extends ControllerAbstract
         //     $this->container->logger->critical("[AuthController::handler}", [$ex->getMessage(), $ex->getCode()]);
         //     // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
         // }
-          
+        $flash = $this->getService('flash');
+
+        $messages = $flash->getMessages();
         return $this->render('Demo/users.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
-            'userLogged' => $this->container->cookies->get('user')
+            'userLogged' => $this->container->cookies->get('user'),
+            'messages' => $messages
         ]);
     }
 
