@@ -28,6 +28,9 @@ class AuthMiddleware extends MiddlewareAbstract
             case '/api/user':
                 $exclude = true;
                 break;
+            case '/api/users':
+                $exclude = true;
+                break;
             case '/auth':
                 $exclude = true;
                 break;

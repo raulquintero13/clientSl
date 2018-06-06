@@ -7,7 +7,7 @@ $app->get('/list', 'App\Controllers\Demo\ListController:index');
 $app->get('/blank', 'App\Controllers\Demo\blankController:index');
 $app->get('/headers', 'App\Controllers\Demo\HeadersController:index');
 
-$app->get('/users', 'App\Controllers\Demo\UsersController:getAllUsers')->setName('users');
+$app->map(['GET','POST'],'/users', 'App\Controllers\Demo\UsersController:getAllUsers')->setName('users');
 
 $app->map(['GET','POST'],'/user/{id}', 'App\Controllers\Demo\UsersController:getUserById');
 $app->map(['GET','POST'],'/user/{id}/edit', 'App\Controllers\Demo\UsersController:editUserById');

@@ -3,7 +3,7 @@
 return [
     'displayErrorDetails' => env('APP_DEBUG', false),
     'determineRouteBeforeAppMiddleware' => false,
-    // 'routerCacheFile' => storage_path() . '/cache/routes.php',
+    'routerCacheFile' => storage_path() . '/cache/routes.php',
 
     'middlewares' => require 'middlewares.php',
 

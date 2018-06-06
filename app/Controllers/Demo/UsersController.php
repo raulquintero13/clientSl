@@ -24,7 +24,7 @@ class UsersController extends ControllerAbstract
         $params = ['user'=>$id];
 
         try {
-            $user = $this->container->curl->post('http://clientsl.local/api/user', $params);
+            $user = $this->container->curl->post('http://serversl.local/api/user', $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
