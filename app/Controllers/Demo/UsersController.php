@@ -38,9 +38,10 @@ class UsersController extends ControllerAbstract
 
         }
 
-
         if($edited){
-            $flash->addMessage('edited','El Registro fue actualizado');
+            $firstname = $request->getParam('firstname');
+            // var_dump($_POST);die;
+            $flash->addMessage('edited','El Registro de '.strtoupper( $firstname).' fue actualizado.');
             return $response->withRedirect($router->pathFor('users'));
         }else{
             // var_dump($request->getParam('edit'));die;
@@ -48,9 +49,30 @@ class UsersController extends ControllerAbstract
                 'title' => $this->title,
                 'menuActive' => $this->menuActive,
                 'userLogged' => $this->container->cookies->get('user'),
-                'user' => $user
+                'id' => $id,
+                'user' => $user,
+                'readonly' => 'readonly'
             ]);
         }
+    }
+
+    public function editUserById($id){
+
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+        $router = $this->getRouter();
+        $flash = $this->getService('flash');
+
+        $user = $request->getParams();
+
+        return $this->render('Demo/user.twig', [
+            'title' => $this->title,
+            'menuActive' => $this->menuActive,
+            'userLogged' => $this->container->cookies->get('user'),
+            'id' => $id,
+            'user' => $user,
+            'readonly' => ''
+        ]);
     }
 
     /**

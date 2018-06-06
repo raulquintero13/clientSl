@@ -7,6 +7,8 @@ document.getElementById('id').focus();
 // buttonAdd.addEventListener("click", add);
 // document.getElementById("del").addEventListener("click", del);
 
+document.getElementById("back").addEventListener("click", window.history.back());
+
 var inputCode = document.getElementById("id");
 var products = [];
 var total = 0;

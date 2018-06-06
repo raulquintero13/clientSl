@@ -15,64 +15,66 @@
 
 
 
-
-    <div class="row content">
-     
-        <div class="col-sm-12 text-left">
-            <br>
+<div class="container">
+    <div class="row content text-left">
             <h1>User</h1>
-     <br><br>       
+     <br><br>   
+        <div class="col-sm-11 text-left">
+               
 
-<div class="row ">
-<div class="col-md-10 col-md-offset-4 ">
-    <form method="POST" action="?edit=1">
+    <form method="POST" action="/user/{{ id }}/edit">
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
-                <input type="text" readonly="readonly" class="form-control-plaintext" id="staticEmail" value="{{user.firstname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="firstname" value="{{user.firstname}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Last Name</label>
             <div class="col-sm-10">
-                <input type="text" readonly="readonly" class="form-control-plaintext" id="staticEmail" value="{{user.lastname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="lastname" value="{{user.lastname}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Position</label>
             <div class="col-sm-10">
-                <input type="text" readonly="readonly" class="form-control-plaintext" id="staticEmail" value="{{user.position}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="position" value="{{user.position}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">City</label>
             <div class="col-sm-10">
-                <input type="text" readonly="readonly" class="form-control-plaintext" id="staticEmail" value="{{user.city}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="city" value="{{user.city}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Start Date</label>
             <div class="col-sm-10">
-                <input type="text" readonly="readonly" class="form-control-plaintext" id="staticEmail" value="{{user.startdate}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="startdate" value="{{user.startdate}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Salary</label>
             <div class="col-sm-10">
-                <input type="text" readonly="readonly" class="form-control-plaintext" id="staticEmail" value="{{user.salary}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="salary" value="{{user.salary}}">
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-sm-3">
+            <div class="col-sm-12">
                 <br>
-                <button class="btn btn-primary pull-right" value="test">Update
-                </button>
+
+                <span class="btn btn-warning" id="back">Regresar</span>
+
+                {% if readonly %}
+                <button class="btn btn-primary pull-right" value="test">Edit</button>
+                {% else %}
+                <button class="btn btn-primary pull-right" value="test">save</button>
+
+                {% endif %}
                 {# Two <input class="btn pull-right" value="test2"> #}
             </div>
         </div>
     </form>
-</div>
-</div>
 
 
 
@@ -81,5 +83,18 @@
         </div>
 
     </div>
+    </div>
 
 {% endblock %}
+{% block scripts %}
+
+<script>
+document.getElementById("back").addEventListener("click", regresar);
+
+function regresar(){
+     window.history.back()
+}
+
+</script>
+
+    {% endblock %}
