@@ -41,7 +41,6 @@ class UsersController extends ControllerAbstract
         if($edited){
             $firstname = $request->getParam('firstname');
             // var_dump($_POST);die;
-            $flash->addMessage('edited','El Registro de '.strtoupper( $firstname).' fue actualizado.');
             return $response->withRedirect($router->pathFor('users'));
         }else{
             // var_dump($request->getParam('edit'));die;
@@ -63,7 +62,16 @@ class UsersController extends ControllerAbstract
         $router = $this->getRouter();
         $flash = $this->getService('flash');
 
+
         $user = $request->getParams();
+
+        $flash->addMessage('edited','El Registro de '.strtoupper( $firstname).' fue actualizado.');
+        
+        $message_error = [];
+        $readonly = '';
+        if ($readonly){
+            $message_error [] = 'No tienes permiso par editar este registro.';
+        }
 
         return $this->render('Demo/user.twig', [
             'title' => $this->title,
@@ -71,7 +79,8 @@ class UsersController extends ControllerAbstract
             'userLogged' => $this->container->cookies->get('user'),
             'id' => $id,
             'user' => $user,
-            'readonly' => ''
+            'readonly' => $readonly,
+            'message_error' => $message_error
         ]);
     }
 

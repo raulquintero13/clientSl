@@ -29,16 +29,16 @@ class UsersController extends ControllerAbstract
 
       ];
     }
-      // ToDo enable for production  /////
+      // ToDo uncomment for production  /////
       // $User->set($user);      
       // $user = $User->toArray();
 
       $this->container->logger->info("api-auth:agent", [$id]);
-      // echo json_encode($users[0]);
-      // echo "hola desde api";die;
+    
       
       return $response->withJson($user,200);
-
+      // $data = prepareData($user);
+      // return $data
     }
     /**
      * getAll
