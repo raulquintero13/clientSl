@@ -11,19 +11,25 @@
   
   
       <link rel="stylesheet" href="/assets_login/css/style.css">
+<style>
+  input[type="text"] { -webkit-text-security: none; }
+  input[type="text"] { -webkit-text-security: circle; }
+  input[type="text"] { -webkit-text-security: square !important;}
+  input[type="password"] { -webkit-text-security: disc; /* Default */ }
 
+</style>
   
 </head>
 
 <body>
 
-  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 
 
 <form action="/login" method="post">
   <h4> Login Information </h4>
-  <input name="email" class="name" type="text" placeholder="Enter Username" value="raul@server.com"/>
-  <input name="password" class="pw" type="password" placeholder="Enter Password"/>
+  <input name="email"  type="password" placeholder="Enter Username" value="raul@server.com"/>
+  <input name="password"  type="password" placeholder="Enter Password"/>
   <li><a href="#">Forgot your password?</a></li>
   <input class="button" type="submit" value="Log in"/>
 </form>

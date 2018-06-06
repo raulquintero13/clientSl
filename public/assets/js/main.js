@@ -7,7 +7,7 @@ document.getElementById('id').focus();
 // buttonAdd.addEventListener("click", add);
 // document.getElementById("del").addEventListener("click", del);
 
-document.getElementById("back").addEventListener("click", window.history.back());
+// document.getElementById("back").addEventListener("click", window.history.back());
 
 var inputCode = document.getElementById("id");
 var products = [];
@@ -30,7 +30,7 @@ function add() {
     // buttonAdd.disabled=true;
     id = document.getElementById('id').value;
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://server.local/apigw/cart/add/" + id, true);
+    xhr.open("GET", "http://server.local/", true);
     xhr.send();
     
     xhr.onreadystatechange = function () {

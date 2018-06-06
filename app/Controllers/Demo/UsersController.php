@@ -68,7 +68,7 @@ class UsersController extends ControllerAbstract
         $flash->addMessage('edited','El Registro de '.strtoupper( $firstname).' fue actualizado.');
         
         $message_error = [];
-        $readonly = '';
+        $readonly = 'readonly';
         if ($readonly){
             $message_error [] = 'No tienes permiso par editar este registro.';
         }
