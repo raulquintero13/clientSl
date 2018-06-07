@@ -1,8 +1,8 @@
-<?php namespace App\Controllers\Demo;
+<?php namespace App\Actions\Demo;
 
 use Core\Kernel\ControllerAbstract;
 
-class LoginController extends ControllerAbstract
+class LoginAction extends ControllerAbstract
 {
 
     /**

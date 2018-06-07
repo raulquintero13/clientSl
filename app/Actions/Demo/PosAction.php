@@ -1,8 +1,8 @@
-<?php namespace App\Controllers\Demo;
+<?php namespace App\Actions\Demo;
 
 use Core\Kernel\ControllerAbstract;
 
-class PosController extends ControllerAbstract
+class PosAction extends ControllerAbstract
 {
     private $titlte = 'Home';
     private $menuActive = '/home';

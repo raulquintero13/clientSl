@@ -1,9 +1,9 @@
-<?php namespace App\Controllers\Auth;
+<?php namespace App\Actions\Auth;
 
 use Core\Kernel\ControllerAbstract;
 use Core\Libraries\Database\SimplePDO;
 
-class AuthController extends ControllerAbstract
+class AuthAction extends ControllerAbstract
 {
     protected $encryptorService; 
 

@@ -1,9 +1,9 @@
-<?php namespace App\Controllers\Demo;
+<?php namespace App\Actions\Demo;
 
 use Core\Kernel\ControllerAbstract;
 use Core\Libraries\Database\SimplePDO;
 
-class BlankController extends ControllerAbstract
+class BlankAction extends ControllerAbstract
 {
     private $titlte = 'Home';
     private $menuActive = '/home';

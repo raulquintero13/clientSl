@@ -1,8 +1,8 @@
-<?php namespace App\Controllers\Demo;
+<?php namespace App\Actions\Demo;
 
 use Core\Kernel\ControllerAbstract;
 
-class UsersController extends ControllerAbstract
+class UsersAction extends ControllerAbstract
 {
     private $title = 'Users';
     private $menuActive = '/users';
@@ -50,7 +50,7 @@ class UsersController extends ControllerAbstract
                 'userLogged' => $this->container->cookies->get('user'),
                 'id' => $id,
                 'user' => $user,
-                'readonly' => 'readonly'
+                'readonly' => 'readonly' 
             ]);
         }
     }
@@ -62,13 +62,13 @@ class UsersController extends ControllerAbstract
         $router = $this->getRouter();
         $flash = $this->getService('flash');
 
-
+ 
         $user = $request->getParams();
 
-        $flash->addMessage('edited','El Registro de '.strtoupper( $firstname).' fue actualizado.');
+        $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
         
         $message_error = [];
-        $readonly = 'readonly';
+        $readonly = '';     //// null or readonly
         if ($readonly){
             $message_error [] = 'No tienes permiso par editar este registro.';
         }
