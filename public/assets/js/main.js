@@ -30,7 +30,7 @@ function add() {
     // buttonAdd.disabled=true;
     id = document.getElementById('id').value;
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://server.local/", true);
+    xhr.open("GET", "http://testphp.local/cart/add/product/" + id, true);
     xhr.send();
     
     xhr.onreadystatechange = function () {
@@ -45,20 +45,20 @@ function add() {
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
                 var cell5 = row.insertCell(4);
-                cell1.innerHTML = res.product;
+                cell1.innerHTML = res.product.name;
                 // .toLowerCase().replace(/\b[a-z]/g, function (letra) {
                     // return letra.toUpperCase();
                 // });;
-                cell2.innerHTML = res.color;
+                cell2.innerHTML = res.product.color;
                 cell2.className = "hidden-480";
-                price = parseInt(res.price); 
+                price = parseInt(res.product.price); 
                 cell3.innerHTML = price.toFixed(2);
                 total = price * 1;
                 cell4.innerHTML = total.toFixed(2);
                 // <button class="btn btn-danger">
                 //     <i class="fa fa-trash-o"></i>
                 // </button>
-                cell5.innerHTML = '<td><button class="btn btn-danger" onclick="deleteRow(this)"> <i class="fa fa-trash-o"></i></button ></td>';
+                cell5.innerHTML = '<td><button class="btn btn-danger" onclick="deleteRow(this)"> <i class="fa fa-trash-o">x</i></button ></td>';
                 // <input type="button" value="Delete" onclick="deleteRow(this)"></td>';
                 products.push(res.product);
                 if (res.typecode == '404') {   
