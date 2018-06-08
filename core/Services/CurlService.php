@@ -20,7 +20,7 @@ class CurlService implements ServiceInterface
     {
         return function($container){
                 
-            $curl = new CurlPhp($container->settings['apiServer']);
+            $curl = new CurlPhp($container);
 
             unset($container);
             

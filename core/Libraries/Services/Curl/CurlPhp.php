@@ -1,39 +1,46 @@
 <?php
 namespace Core\Libraries\Services\Curl;
 
-class CurlPhp
+use Core\Kernel\ServiceAbstract;
+
+class CurlPhp extends ServiceAbstract
 {
     /** @var resource cURL handle */
     private $ch;
     /** @var mixed The response */
     private $response = false;
-    /**
-     * @param string $url
-     * @param array  $options
-     */
-    public function __construct()
-    {
-       
-    }
+   
+    
     /**
      * Get the response
      * @return string
      * @throws \RuntimeException On cURL error
      */
+   
+     /**
+     * @param string $url
+     * @param array  $options
+     */
+    
     public function post($url, array $fields = array())
     {
-        
+        $logger = $this->getService('logger');
+        $logger->info("CurlPhp::post", $fields);
+
         $this->ch = curl_init($url);
         $headers = $this->_getHeaders();
        
-        $fields_string = '';
-        foreach ($fields as $key => $value) {$fields_string .= $key . '=' . $value . '&';}
-        rtrim($fields_string, '&');
+        // $fields_string = '';
+        // foreach ($fields as $key => $value) {$fields_string .= $key . '=' . $value . '&';}
+        // rtrim($fields_string, '&');
         
+        $fields_string = http_build_query( $fields );
+
+
         // var_dump($fields_string);die;
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->ch,CURLOPT_POST,count($fields));
+        curl_setopt($this->ch, CURLOPT_POST,count($fields));
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $fields_string);
        $response = curl_exec($this->ch);
