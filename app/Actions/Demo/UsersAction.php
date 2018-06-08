@@ -84,6 +84,24 @@ class UsersAction extends ControllerAbstract
         ]);
     }
 
+
+
+
+    public function saveUserById($id){
+
+        $request = $this->getRequest();
+        $flash = $this->getService('flash');
+        $response = $this->getService('response');
+        $router =  $this->getRouter();
+
+        $user = $request->getParams();
+
+        $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
+        return $response->withRedirect($router->pathFor('users'));
+    }
+
+
+
     /**
      * Index Action
      *

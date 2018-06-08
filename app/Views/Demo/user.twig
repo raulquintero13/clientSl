@@ -39,7 +39,7 @@
     {% if readonly %}
         {% set path = '/user/'~ id ~'/edit' %}
     {% else %}
-        {% set path =  '/users'   %}
+        {% set path =  '/users/'~ id ~'/save'   %}
     {% endif %}
     <form method="POST" action="{{ path }}">
         <div class="form-group row">
