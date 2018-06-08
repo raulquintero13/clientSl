@@ -31,14 +31,7 @@
         .fill {
             min-height: 100%;
         }
-        @media screen and (max-width: 767px) {
-            .tabla {
-                height: 460px;
-                margin-left: 10px;
-                margin-right: 10px;
-                background-color: white;
-            }
-        }
+       
 
 
         .container-fluid {
@@ -67,6 +60,23 @@
         }
         .listproductos{
             margin-top:-20px;
+            height:440px;
+        }
+        #bottomTicket{
+            color: black;
+        }
+
+         @media screen and (max-width: 767px) {
+            .tabla {
+                height: 460px;
+                margin-left: 10px;
+                margin-right: 10px;
+                background-color: white;
+            }
+            .listproductos{
+                margin-top:-20px;
+                height:400px;
+            }
         }
     </style>
 
@@ -74,7 +84,7 @@
 <div class="col-sm-8">
     <div class="tabla">
         <div class="container fill">
-            <div id="detalleTicket" class="box-content nopadding" style="overflow-y:none;">
+            <div id="detalleTicket2" class="box-content nopadding" style="overflow-y:none;">
                 <table id="mytable2" class="table table-hover table-striped table-nomargin table-borderedeee ">
                     <thead>
                         <tr>
@@ -122,7 +132,10 @@
 
                         </tbody>
                     </table>
-                        <div id="bottomTicket" ><br><br><br></div>
+                        <div id="bottomTicket" >
+                        
+                        <h2>Total: $ <span id="total">0</span>.00</h2
+                        <br><br><br></div>
             </div><br>
         </div> <!-- This one wants to be 100% height -->
     </div>
