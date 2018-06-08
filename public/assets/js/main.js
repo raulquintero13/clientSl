@@ -71,15 +71,19 @@ function add() {
                 var cell4 = row.insertCell(3);
                 var cell5 = row.insertCell(4);
                 cell1.innerHTML = res.product.name;
+                cell1.className = "celda";
                 // .toLowerCase().replace(/\b[a-z]/g, function (letra) {
                     // return letra.toUpperCase();
                 // });;
                 cell2.innerHTML = res.product.color;
-                cell2.className = "hidden-480";
+                cell2.className = "hidden-480 celda";
                 price = parseInt(res.product.price); 
                 cell3.innerHTML = price.toFixed(2);
+                cell3.className = "celda";
                 total = price * 1;
                 cell4.innerHTML = total.toFixed(2);
+                cell4.className = "celda";
+
                 // <button class="btn btn-danger">
                 //     <i class="fa fa-trash-o"></i>
                 // </button>
