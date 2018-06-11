@@ -52,6 +52,27 @@ class AuthAction extends ControllerAbstract
         
     }
     
+
+    public function showProfile(){
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+        $router = $this->getRouter();
+        $flash = $this->getService('flash');
+        $params = ['user'=>$id];
+
+
+
+        return $this->render('Demo/profile.twig', [
+            'title' => $this->title,
+            'menuActive' => $this->menuActive,
+            'userLogged' => $this->container->cookies->get('user'),
+            'id' => $id,
+            'user' => $user,
+            'readonly' => 'readonly' 
+        ]);
+
+
+    }
 }
 
 

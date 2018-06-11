@@ -45,7 +45,7 @@
 
 /* Style the tab content */
 .tabcontent {
-    margin-top:20px;
+    margin-top: 10px;
     float: left;
     padding: 0px 12px;
     {# border: 1px solid #ccc; #}
@@ -73,7 +73,7 @@
 
 
     <div class="row content text-left">
-            <h1>User</h1>
+            <h1>User Details</h1>
      <br><br>   
         <div class="col-sm-11 text-left">
 
@@ -92,43 +92,43 @@
     {% endif %}
     <form method="POST" action="{{ path }}">
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">Name</label>
+            <div class="col-sm-9">
                 <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="firstname" value="{{user.firstname}}">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Last Name</label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Last Name</label>
+            <div class="col-sm-9">
                 <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="lastname" value="{{user.lastname}}">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Position</label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
+            <div class="col-sm-9">
                 <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="position" value="{{user.position}}">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">City</label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">City</label>
+            <div class="col-sm-9">
                 <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="city" value="{{user.city}}">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Start Date</label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Start Date</label>
+            <div class="col-sm-9">
                 <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="startdate" value="{{user.startdate}}">
             </div>
         </div>
         <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Salary</label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
+            <div class="col-sm-9">
                 <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="salary" value="{{user.salary}}">
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-sm-12">
+            <div class="col-sm-11 col-md-offset-1 ">
                 <br>
 
                 <span class="btn btn-warning" id="back">Regresar</span>
@@ -147,15 +147,76 @@
 </div>
 
 <div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
+
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-th"></span>
+                        Change password   
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 separator social-login-box"> <br>
+                           <img alt="" class="img-thumbnail" src="https://bootdey.com/img/Content/avatar/avatar1.png">                        
+                        </div>
+                        <div style="margin-top:80px;" class="col-xs-6 col-sm-6 col-md-6 login-box">
+                         <div class="form-group">
+                            <div class="input-group">
+                              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                              <input class="form-control" type="password" placeholder="Current Password">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <div class="input-group-addon"><span class="glyphicon glyphicon-log-in"></span></div>
+                              <input class="form-control" type="password" placeholder="New Password">
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6"></div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <button class="btn icon-btn-save btn-success" type="submit">
+                            <span class="btn-save-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </div>
 
 <div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
+  {# <h2>Vertical (basic) form</h2> #}
+  <form action="/action_page.php">
+    <div class="form-group">
+      <label for="email">Old Password:</label>
+      <input type="email" class="form-control" id="oldpwd" placeholder="Enter old password" name="oldpwd">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Retype Password:</label>
+      <input type="password" class="form-control" id="repwd" placeholder="Enter password" name="repwd">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
                
+</div>
 
 
 

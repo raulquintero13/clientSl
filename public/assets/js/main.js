@@ -135,7 +135,8 @@ function sum(input) {
         console.log(products[i]['price']);
         total += Number(products[i]['price']);
     }
-    document.getElementById("total").innerHTML = total;
+    document.getElementById("stotal1").innerHTML = total;
+    document.getElementById("stotal2").innerHTML = total;
     document.getElementById("gtotal").innerHTML = total ;
     console.log(total);
 }
