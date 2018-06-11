@@ -55,6 +55,27 @@ class UsersAction extends ControllerAbstract
         }
     }
 
+
+    public function getProfile($id)
+    {
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+        $router = $this->getRouter();
+        $flash = $this->getService('flash');
+        $params = ['user'=>$id];
+
+
+
+        return $this->render('Demo/profile.twig', [
+            'title' => $this->title,
+            'menuActive' => $this->menuActive,
+            'userLogged' => $this->container->cookies->get('user'),
+            'id' => $id,
+            'user' => $user,
+            'readonly' => 'readonly' 
+        ]);
+    }
+
     public function editUserById($id){
 
         $request = $this->getRequest();

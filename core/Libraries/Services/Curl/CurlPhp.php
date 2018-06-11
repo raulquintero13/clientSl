@@ -25,17 +25,17 @@ class CurlPhp extends ServiceAbstract
     public function post($url, array $fields = array())
     {
         $logger = $this->getService('logger');
-        $logger->info("CurlPhp::post", $fields);
-
+        
         $this->ch = curl_init($url);
         $headers = $this->_getHeaders();
-       
+        
         // $fields_string = '';
         // foreach ($fields as $key => $value) {$fields_string .= $key . '=' . $value . '&';}
         // rtrim($fields_string, '&');
         
         $fields_string = http_build_query( $fields );
-
+        
+        $logger->info("CurlPhp::post", [$fields_string]);
 
         // var_dump($fields_string);die;
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
