@@ -56,9 +56,15 @@ function add() {
     id = document.getElementById('id').value;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://testphp.local/cart/add/product/" + id, true);
+   
     xhr.send();
     
     xhr.onreadystatechange = function () {
+        if(xhr.status == 0) {
+           input_id.disabled = false;
+            alert('someting was worng: Server Fail');
+            return;
+        }
         if (xhr.readyState == 4 && xhr.status == 200) {
             // document.getElementById("parrafo").innerHTML = xhr.responseText;
             var res = JSON.parse(xhr.responseText)
