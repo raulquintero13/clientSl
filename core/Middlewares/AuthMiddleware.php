@@ -20,29 +20,29 @@ class AuthMiddleware extends MiddlewareAbstract
     {
         switch ($request->getUri()->getPath()) {
             case '/none':
-                $exclude = true;
+                $public = true;
                 break;
             case '/login':
-                $exclude = true;
+                $public = true;
                 break;
             case '/api/user':
-                $exclude = true;
+                $public = true;
                 break;
             case '/api/users':
-                $exclude = true;
+                $public = true;
                 break;
             case '/auth':
-                $exclude = true;
+                $public = true;
                 break;
             case '/api/auth':
-                $exclude = true;
+                $public = true;
                 break;
             default:
-                $exclude = false;
+                $public = false;
                 break;
         }
         // $response->getBody()->write('-- BEFORE --<br><br>');
-        if ($this->_isLogged() || $exclude){
+        if ($this->_isLogged() || $public){
             $response = $next($request, $response);
             
         } else

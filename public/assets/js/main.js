@@ -45,6 +45,12 @@ var scroll = document.getElementById('detalleTicket');
 $body = $("body");
 
 
+
+
+
+
+
+
 function add() {
     if (document.getElementById('id').value == '') {
         document.getElementById('id').value = '';
