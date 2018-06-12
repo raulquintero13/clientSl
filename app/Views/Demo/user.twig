@@ -94,37 +94,37 @@
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="firstname" value="{{user.firstname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{user.firstname}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Last Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="lastname" value="{{user.lastname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.lastname}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="position" value="{{user.position}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{user.position}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">City</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="city" value="{{user.city}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="city" name="city" value="{{user.city}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Start Date</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="startdate" value="{{user.startdate}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="startdate" name="startdate" value="{{user.startdate}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="salary" value="{{user.salary}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="salary" value="{{user.salary}}">
             </div>
         </div>
         <div class="form-group row">
@@ -148,88 +148,80 @@
 
 <div id="Paris" class="tabcontent">
 
-<div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <span class="glyphicon glyphicon-th"></span>
-                        Change password   
-                    </h3>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
+            {# <h2>Vertical (basic) form</h2> #}
+            <form action="/action_page.php">
+                <div class="form-group">
+                    <label for="email">Old Password:</label>
+                    <input type="email" class="form-control" id="oldpwd" placeholder="Enter old password" name="oldpwd">
                 </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6 separator social-login-box"> <br>
-                           <img alt="" class="img-thumbnail" src="https://bootdey.com/img/Content/avatar/avatar1.png">                        
-                        </div>
-                        <div style="margin-top:80px;" class="col-xs-6 col-sm-6 col-md-6 login-box">
-                         <div class="form-group">
-                            <div class="input-group">
-                              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                              <input class="form-control" type="password" placeholder="Current Password">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="input-group">
-                              <div class="input-group-addon"><span class="glyphicon glyphicon-log-in"></span></div>
-                              <input class="form-control" type="password" placeholder="New Password">
-                            </div>
-                          </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
                 </div>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6"></div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <button class="btn icon-btn-save btn-success" type="submit">
-                            <span class="btn-save-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>save</button>
+                <div class="form-group">
+                    <label for="pwd">Retype Password:</label>
+                    <input type="password" class="form-control" id="repwd" placeholder="Enter password" name="repwd">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+        </div>
+
+</div>
+
+    <div id="Tokyo" class="tabcontent">
+        <div class="container bootstrap snippet">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-th"></span>
+                                Change password   
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 separator social-login-box"> <br>
+                                <img alt="" class="img-thumbnail" src="https://bootdey.com/img/Content/avatar/avatar1.png">                        
+                                </div>
+                                <div style="margin-top:80px;" class="col-xs-6 col-sm-6 col-md-6 login-box">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                    <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                                    <input class="form-control" type="password" placeholder="Current Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                    <div class="input-group-addon"><span class="glyphicon glyphicon-log-in"></span></div>
+                                    <input class="form-control" type="password" placeholder="New Password">
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6"></div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <button class="btn icon-btn-save btn-success" type="submit">
+                                    <span class="btn-save-label"><i class="glyphicon glyphicon-floppy-disk"></i></span>save</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-</div>
-
-<div id="Tokyo" class="tabcontent">
-
-<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
-  {# <h2>Vertical (basic) form</h2> #}
-  <form action="/action_page.php">
-    <div class="form-group">
-      <label for="email">Old Password:</label>
-      <input type="email" class="form-control" id="oldpwd" placeholder="Enter old password" name="oldpwd">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Retype Password:</label>
-      <input type="password" class="form-control" id="repwd" placeholder="Enter password" name="repwd">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-               
-</div>
-
-
-
 
     
 
-
-
-
-        </div>
-
     </div>
-    </div>
+
+</div>
+</div>
 
 {% endblock %}
 {% block scripts %}

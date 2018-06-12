@@ -47,6 +47,7 @@ class UsersController extends ControllerAbstract
      */
     public function getAll()
     {
+      $response = $this->getResponse();
 
       $users = require 'users.php';
       // $request = $this->getRequest();
@@ -55,14 +56,15 @@ class UsersController extends ControllerAbstract
       $logger = $this->getService('logger');
       $logger->info("users::", [$_GET]);
       
-      
+      $code = 200;
       
       $users[$_GET['start']]['data'] = $this->_arrayToLinks($users[$_GET['start']]['data']);
       
       $users[$_GET['start']]['draw']=$_GET['draw'];
 
-      echo json_encode($users[$_GET['start']]);
+      // echo json_encode($users[$_GET['start']]);
         
+      return $response->withJson($users[$_GET['start']], $code);
 
         // $results = $this->container->simplePdo->get_results("SELECT * FROM users ");
         // foreach ($results as $user) {
