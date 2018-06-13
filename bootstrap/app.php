@@ -2,6 +2,9 @@
 
 use \Core\Kernel\App;
 
+define('DS', DIRECTORY_SEPARATOR);
+define('STORAGE_PATH', realpath(__DIR__.'/storage/').DS);
+
 require 'kernel.php';
 
 session_start();

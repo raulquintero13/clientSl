@@ -1,6 +1,6 @@
 {% extends 'Demo/Base.twig' %}
 
-{% block title %}{{title}}{% endblock %}
+{% block title %}{{title is defined ? title : 'not defined'}}{% endblock %}
 
 {% block head %}
 {# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/> #}
@@ -104,19 +104,19 @@
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{user.firstname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{user.firstname|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Last Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.lastname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.lastname|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{user.position}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{user.position|ucwords}}">
             </div>
         </div>
         <div class="form-group row">

@@ -46,7 +46,7 @@ class UsersAction extends ControllerAbstract
         }else{
             // var_dump($request->getParam('edit'));die;
             return $this->render('Demo/user.twig', [
-                'title' => $this->title,
+                'title' => 'User: '.$user['firstname'].' '.$user['lastname'],
                 'menuActive' => $this->menuActive,
                 'userLogged' => $this->container->cookies->get('user'),
                 'id' => $id,

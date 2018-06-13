@@ -31,9 +31,13 @@ class TwigViewService implements ServiceInterface
                     $container->router,
                     $container->request->getUri()
                 )
-            );
+);
+            $view->addExtension(new \Core\Libraries\Services\Twig\TwigExtension($container));
 
             $view->getEnvironment()->addGlobal('flash', $container->flash);
+            $view->getEnvironment()->addFilter(new \Twig_SimpleFilter('ucfirst', 'ucfirst'));
+            $view->getEnvironment()->addFilter(new \Twig_SimpleFilter('ucwords', 'ucwords'));
+
 
             unset($container);
 

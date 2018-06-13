@@ -12,18 +12,24 @@ class Cookies
         $this->res = $container->response;
     }
 
-    public function get($name)
+    public static function exists($key)
     {
-        return $_COOKIE[$name];
+        return (isset($_COOKIE[$key])) ? true : false;
     }
 
-    public function set($name, $value = "", $expire = 1)
+    public function get($key)
     {
-        setcookie($name, $value, time() + (86400 * 30), "/"); // 86400 = 1 day
+        return $_COOKIE[$key];
+    }
+
+    public function set($key, $value = "", $expire = 1, $path ='/', $domain = null, $secure = false, $http = true)
+    {
+        setcookie($key, $value, time() + (86400 * 30), $path, $domain, $secure, $http); // 86400 = 1 day
         
     }
 
-    public function delete($name){
-        setcookie($name, "", time() - 3600);
+    public static function destroy($key)
+    {
+        self::set($key, '', time() - 1);
     }
 }
