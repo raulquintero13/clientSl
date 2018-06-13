@@ -79,7 +79,7 @@ class UsersController extends ControllerAbstract
 
       foreach($array as $key=>$value){
         foreach($value as $k=>$v){
-          $value[$k] = '<a href="/user/'.$key.'">'.$v.'</a>';
+          $value[$k] = '<a href="/user/'.$key.'">'.ucwords($v).'</a>';
         }
         $array[$key] = $value;
       }

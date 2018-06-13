@@ -4,6 +4,17 @@ return [
     'displayErrorDetails' => env('APP_DEBUG', false),
     'determineRouteBeforeAppMiddleware' => false,
     // 'routerCacheFile' => storage_path() . '/cache/routes.php',
+    'timezone' => 'Europe/Lisbon',
+    'session' => [
+        'name' => 'app',
+        'lifetime' => 7200,
+        'path' => '/',
+        'domain' => null,
+        'secure' => false,
+        'httponly' => true,
+        'cache_limiter' => 'nocache',
+        'filesPath' => STORAGE_PATH.'sessions',
+    ],
 
     'middlewares' => require 'middlewares.php',
 
