@@ -22,6 +22,7 @@ class UsersAction extends ControllerAbstract
         $router = $this->getRouter();
         $flash = $this->getService('flash');
         $params = ['user'=>$id];
+        $messages = $flash->getMessages();
 
         try {
             $user = $this->container->curl->post('http://serversl.local/api/user', $params);
@@ -50,7 +51,8 @@ class UsersAction extends ControllerAbstract
                 'userLogged' => $this->container->cookies->get('user'),
                 'id' => $id,
                 'user' => $user,
-                'readonly' => 'readonly' 
+                'readonly' => 'readonly',
+                'messages' => $messages 
             ]);
         }
     }
@@ -118,7 +120,8 @@ class UsersAction extends ControllerAbstract
         $user = $request->getParams();
 
         $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
-        return $response->withRedirect($router->pathFor('users'));
+        return $response->withRedirect($router->pathFor('user',['id' => $id]));
+        // $this->router->pathFor('author', ['author_id' => $author->id])
     }
 
 
