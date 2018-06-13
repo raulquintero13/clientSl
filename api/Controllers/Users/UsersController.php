@@ -62,8 +62,8 @@ class UsersController extends ControllerAbstract
       
       $users[$_GET['start']]['draw']=$_GET['draw'];
 
-      // echo json_encode($users[$_GET['start']]);
-        
+      //  echo json_encode($users[$_GET['start']]);
+
       return $response->withJson($users[$_GET['start']], $code);
 
         // $results = $this->container->simplePdo->get_results("SELECT * FROM users ");
