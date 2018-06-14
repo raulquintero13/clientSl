@@ -1,0 +1,61 @@
+{% extends 'Demo/Base.twig' %}
+
+{% block title %}{{title is defined ? title : 'not defined'}}{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+{% block container %}
+
+<div class="container">
+{# {% block navigation %}
+   
+{% endblock %} #}
+{% if message_error is defined %}
+    {% for message in message_error %}
+        <div class="alert  alert-success ">
+            {{message}}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="row col-sm-6">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Application</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div>
+  
+
+
+
+
+
+
+
+
+
+{% endblock %}

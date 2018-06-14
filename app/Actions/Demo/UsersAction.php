@@ -58,14 +58,20 @@ class UsersAction extends ControllerAbstract
     }
 
 
-    public function getProfile($id)
+    public function getProfile($id = 0)
     {
         $request = $this->getRequest();
         $response = $this->getResponse();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
         $params = ['user'=>$id];
-
+        
+        try {
+            $user = $this->container->curl->post('http://serversl.local/api/user', $params);
+        } catch (\RuntimeException $ex) {
+            $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
+            // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
+        }
 
 
         return $this->render('Demo/profile.twig', [
@@ -77,6 +83,26 @@ class UsersAction extends ControllerAbstract
             'readonly' => 'readonly' 
         ]);
     }
+
+    public function menuSettings()
+    {
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+        $router = $this->getRouter();
+        $flash = $this->getService('flash');
+
+
+        return $this->render('Demo/settings.twig', [
+            'title' => 'Settings',
+            'menuActive' => $this->menuActive,
+            'userLogged' => $this->container->cookies->get('user'),
+            'id' => $id,
+            'user' => $user,
+            'readonly' => 'readonly' 
+        ]);
+    }
+
+
 
     public function editUserById($id){
 

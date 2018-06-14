@@ -86,9 +86,9 @@
 
 <div id="London" class="tabcontent">
   {% if readonly %}
-        {% set path = '/user/'~ id ~'/edit' %}
+        {% set path = '/settings/profile' %}
     {% else %}
-        {% set path =  '/users/'~ id ~'/save'   %}
+        {% set path =  '/users/save' %}
     {% endif %}
     <form method="POST" action="{{ path }}">
         <div class="form-group row">
