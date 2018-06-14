@@ -16,7 +16,7 @@
 {% block container %}
 
 
-<div class="container">
+<div class="container text-left ">
 {% if message_error is defined %}
     {% for message in message_error %}
 <div class="alert  alert-success " >
@@ -30,7 +30,9 @@
 
 
 
-
+<pre>
+{{ environment }}
+</pre>
 
 
 
