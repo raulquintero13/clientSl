@@ -14,7 +14,7 @@ class LoginAction extends ControllerAbstract
     {
         // $this->container->logger->info("myloggernew",[1,2]);
 
-        $this->container->cookies->delete('user');
+        $this->container->cookies->destroy('user');
             
         // $_COOKIE['user'] = null;
         return $this->render('Demo/Login/index.twig');

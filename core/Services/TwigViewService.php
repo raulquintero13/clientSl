@@ -33,12 +33,18 @@ class TwigViewService implements ServiceInterface
                 )
 );
             $view->addExtension(new \Core\Libraries\Services\Twig\TwigExtension($container));
+            
 
             $view->getEnvironment()->addGlobal('flash', $container->flash);
             $view->getEnvironment()->addFilter(new \Twig_SimpleFilter('ucfirst', 'ucfirst'));
             $view->getEnvironment()->addFilter(new \Twig_SimpleFilter('ucwords', 'ucwords'));
 
+            $view->getEnvironment()->addGlobal('currentUrl',$container->get('request')->getUri());
+            $view->getEnvironment()->addGlobal('currentUri',$container->get('request')->getUri()->getPath());
 
+            $view->getEnvironment()->addGlobal('userLogged1','raul.quintero@server.com');
+
+            
             unset($container);
 
             return $view;
