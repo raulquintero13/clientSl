@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controllers\Base;
 
 use Core\Kernel\ControllerAbstract;
@@ -23,13 +23,12 @@ class MainController extends ControllerAbstract
         $messages = $flash->getMessages();
         // dump ($messages);die;
         // dump($request->getAttributre('ip_address'));die;
-        return $this->render('Demo/Home/index.twig',[
+        return $this->render('Demo/Home/index.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
-            'messages' => $messages
+            'messages' => $messages,
         ]);
     }
 
-   
 }
