@@ -27,6 +27,6 @@ $app->registerAppMiddlewares();
 
 require app_path() . '/Routes/app.php';
 require api_path() . '/Routes/app.php';
-require apigw_path() . '/Routes/app.php';
+require apiDesktop_path() . '/Routes/app.php';
 
 $app->run();

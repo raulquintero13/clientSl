@@ -96,9 +96,9 @@
 
 <div id="London" class="tabcontent">
   {% if readonly %}
-        {% set path = '/user/edit/'~ id  %}
+        {% set path = path_for('userEdit',{'id':id})  %}
     {% else %}
-        {% set path =  '/users/save/'~ id  %}
+        {% set path =  path_for('userSave',{'id':id})  %}
     {% endif %}
     <form method="POST" action="{{ path }}">
         <div class="form-group row">
@@ -240,7 +240,7 @@
 document.getElementById("back").addEventListener("click", regresar);
 
 function regresar(){
-     window.location.href='http://clientsl.local/users';
+     window.location.href='http://clientsl.local/system/users';
 }
 
 </script>

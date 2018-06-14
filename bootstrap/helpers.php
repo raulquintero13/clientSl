@@ -119,15 +119,15 @@ if (!function_exists('api_path')) {
     }
 }
 
-if (!function_exists('apigw_path')) {
+if (!function_exists('apiDesktop_path')) {
     /**
      * Get the path to the application folder
      *
      * @return string
      */
-    function apigw_path()
+    function apiDesktop_path()
     {
-        return base_path() . '/apigw';
+        return base_path() . '/apiDesktop';
     }
 }
 

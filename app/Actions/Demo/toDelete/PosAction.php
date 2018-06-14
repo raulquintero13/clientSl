@@ -16,15 +16,13 @@ class PosAction extends ControllerAbstract
         // $this->container->logger->info("HomeController",[1,23]);
 
         // $env = $this->getRequest()->getServerParams();
-        // dump($env['APP_ENV']);die;
-        
-        // dump($request->getAttributre('ip_address'));die;
-        return $this->render('Demo/Pos/index.twig',[
+        // dump($env);die;
+
+        return $this->render('Demo/Pos/index.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
-            'userLogged' => $this->container->cookies->get('user')
+            'userLogged' => $this->container->cookies->get('user'),
         ]);
     }
 
-   
 }

@@ -94,37 +94,37 @@
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="firstname" value="{{user.firstname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{user.firstname|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Last Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="lastname" value="{{user.lastname}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.lastname|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="position" value="{{user.position}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{user.position|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">City</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="city" value="{{user.city}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="city" name="city" value="{{user.city}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Start Date</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="startdate" value="{{user.startdate}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="startdate" name="startdate" value="{{user.startdate}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="staticEmail" name="salary" value="{{user.salary}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="salary" value="{{user.salary}}">
             </div>
         </div>
         <div class="form-group row">
@@ -172,23 +172,7 @@
 <div id="Tokyo" class="tabcontent">
 
 <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
-  {# <h2>Vertical (basic) form</h2> #}
-  <form action="/action_page.php">
-    <div class="form-group">
-      <label for="oldpwd">Old Password:</label>
-      <input type="password" class="form-control" id="oldpwd" placeholder="Enter old password" name="oldpwd">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Retype Password:</label>
-      <input type="password" class="form-control" id="repwd" placeholder="Enter password" name="repwd">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-               
+another info   
 </div>
 </div>
 

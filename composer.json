@@ -28,7 +28,7 @@
   "autoload": {
     "psr-4": {
       "Api\\": "api/",
-      "Apigw\\": "apigw/",
+      "ApiDesktop\\": "apiDesktop/",
       "App\\": "app/",
       "Core\\": "core/"
     },
