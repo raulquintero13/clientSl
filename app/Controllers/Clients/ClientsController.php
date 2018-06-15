@@ -1,8 +1,8 @@
-<?php namespace App\Controllers\Base;
+<?php namespace App\Controllers\Clients;
 
 use Core\Kernel\ControllerAbstract;
 
-class UsersController extends ControllerAbstract
+class ClientsController extends ControllerAbstract
 {
     private $title = 'Users';
     private $menuActive = '/users';
@@ -185,7 +185,7 @@ class UsersController extends ControllerAbstract
         $flash = $this->getService('flash');
 
         $messages = $flash->getMessages();
-        return $this->render('Demo/users.twig', [
+        return $this->render('Clients\clients.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),

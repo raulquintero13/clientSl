@@ -26,7 +26,7 @@ class LoginController extends ControllerAbstract
      *
      * @return string
      */
-    public function attempAction()
+    public function attemptAction()
     {
         $settings = $this->getService('settings');
         $response = $this->getResponse();

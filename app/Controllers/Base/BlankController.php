@@ -37,7 +37,7 @@ class BlankController extends ControllerAbstract
         return $this->render('Base/blank.twig',[
             'title' => $title,
             'menuActive' => $menuActive,
-            'messages' => $messages
+            'messages' => $messages 
 
             // defined globally in twig
             // 'userLogged' => $this->container->cookies->get('user')

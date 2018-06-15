@@ -1,8 +1,8 @@
-<?php namespace App\Controllers\Base;
+<?php namespace App\Controllers\Employees;
 
 use Core\Kernel\ControllerAbstract;
 
-class UsersController extends ControllerAbstract
+class EmployeesController extends ControllerAbstract
 {
     private $title = 'Users';
     private $menuActive = '/users';
@@ -45,7 +45,7 @@ class UsersController extends ControllerAbstract
             return $response->withRedirect($router->pathFor('users'));
         }else{
             // var_dump($request->getParam('edit'));die;
-            return $this->render('Demo/user.twig', [
+            return $this->render('Employees/employees.twig', [
                 'title' => 'User: '.$user['firstname'].' '.$user['lastname'],
                 'menuActive' => $this->menuActive,
                 'userLogged' => $this->container->cookies->get('user'),
@@ -185,7 +185,7 @@ class UsersController extends ControllerAbstract
         $flash = $this->getService('flash');
 
         $messages = $flash->getMessages();
-        return $this->render('Demo/users.twig', [
+        return $this->render('Employees\employees.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),

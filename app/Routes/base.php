@@ -2,7 +2,6 @@
 
 $app->get('/', 'App\Controllers\Base\HomeController:homeAction')->setName('home');
 $app->get('/pos', 'App\Controllers\Modules\PosController:posAction');
-$app->get('/list', 'App\Actions\Demo\ListAction:index');
 
 // $app->map(['GET','POST'],'/users', 'App\Actions\Demo\UsersAction:getAllUsers')->setName('users');
 

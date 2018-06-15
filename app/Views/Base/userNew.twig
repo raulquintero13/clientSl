@@ -1,0 +1,174 @@
+{% extends 'Demo/Base.twig' %}
+
+{# {% block navigation %}
+   
+{% endblock %} #}
+
+{% block title %}{{title is defined ? title : 'not defined'}}
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block container %}
+<div class="container text-left ">
+    {% if messages is defined %}
+        {% for message in messages %}
+            <div class="alert  alert-success ">
+                {{message}}
+
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <h1>New User</h1>
+    <br><br>
+
+
+    <div class="box-content">
+        <form action="#" method="POST" class='form-horizontal'>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Curp</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                    <span class="help-block">This is just a supporting text</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Middle Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Last Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Zip Code</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Address</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Date of Brith</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textfield" class="control-label col-sm-2">Last Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="textfield" id="textfield" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="control-label col-sm-2">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" id="password" placeholder="*********" class="form-control">
+                    <span class="help-block">Minimum length: 9, only numeric</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="file" class="control-label col-sm-2">File-input</label>
+                <div class="col-sm-10">
+                    <input type="file" name="file" id="file" class="form-control">
+                    <span class="help-block">Only .jpg (Max Size: 100MB)</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="select" class="control-label col-sm-2">Select</label>
+                <div class="col-sm-10">
+                    <select name="select" id="select" class='form-control'>
+                        <option value="1">Option-1</option>
+                        <option value="2">Option-2</option>
+                        <option value="3">Option-3</option>
+                        <option value="4">Option-4</option>
+                        <option value="5">Option-5</option>
+                        <option value="6">Option-6</option>
+                        <option value="7">Option-7</option>
+                        <option value="8">Option-8</option>
+                        <option value="9">Option-9</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Checkboxes</label>
+                <div class="col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="checkbox">Lorem ipsum dolor.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="checkbox">Lorem ipsum dolor sit.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="checkbox">Lorem ipsum.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Radios</label>
+                <div class="col-sm-10">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="radio">Lorem ipsum dolor sit.
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="radio">Lorem ipsum dolor.
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="radio">Lorem Lorem ipsum dolor.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textarea" class="control-label col-sm-2">Textarea</label>
+                <div class="col-sm-10">
+                    <textarea name="textarea" id="textarea" class="form-control">Lorem ipsum mollit minim fugiat tempor dolore sit officia ut dolore.</textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}{% endblock %}
