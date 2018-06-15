@@ -22,9 +22,9 @@ class UtilitiesController extends ControllerAbstract
         $request = $this->getRequest();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
+        $messages = $flash->getMessages();
 
         
-
         // debug functions available
         // dump($_SERVER);
         // $this->container->logger->info("myloggernew",[1,2]);
@@ -35,7 +35,8 @@ class UtilitiesController extends ControllerAbstract
         return $this->render('Demo/blank.twig',[
             'title' => $title,
             'menuActive' => $menuActive,
-            'environment' => $environment
+            'environment' => $environment,
+            'messages' => $messages
             // defined globally in twig
             // 'userLogged' => $this->container->cookies->get('user')
             ]);

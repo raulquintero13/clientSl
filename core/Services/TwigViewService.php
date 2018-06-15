@@ -32,8 +32,8 @@ class TwigViewService implements ServiceInterface
                     $container->request->getUri()
                 )
 );
+
             $view->addExtension(new \Core\Libraries\Services\Twig\TwigExtension($container));
-            
 
             $view->getEnvironment()->addGlobal('flash', $container->flash);
             $view->getEnvironment()->addFilter(new \Twig_SimpleFilter('ucfirst', 'ucfirst'));
@@ -42,7 +42,8 @@ class TwigViewService implements ServiceInterface
             $view->getEnvironment()->addGlobal('currentUrl',$container->get('request')->getUri());
             $view->getEnvironment()->addGlobal('currentUri',$container->get('request')->getUri()->getPath());
 
-            $view->getEnvironment()->addGlobal('userLogged1','raul.quintero@server.com');
+            $cookies = $container->cookies;
+            $view->getEnvironment()->addGlobal('userLogged1',$cookies->get('user'));
 
             
             unset($container);

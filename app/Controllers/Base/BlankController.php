@@ -22,6 +22,7 @@ class BlankController extends ControllerAbstract
         $request = $this->getRequest();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
+        $messages = $flash->getMessages();
 
         
         $flash->addMessage('home', 'Welcome Back');
@@ -35,7 +36,9 @@ class BlankController extends ControllerAbstract
 
         return $this->render('Base/blank.twig',[
             'title' => $title,
-            'menuActive' => $menuActive
+            'menuActive' => $menuActive,
+            'messages' => $messages
+
             // defined globally in twig
             // 'userLogged' => $this->container->cookies->get('user')
             ]);
