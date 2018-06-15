@@ -1,8 +1,8 @@
-<?php namespace App\Actions\Demo;
+<?php namespace App\Controllers\Base;
 
 use Core\Kernel\ControllerAbstract;
 
-class HomeAction extends ControllerAbstract
+class HomeController extends ControllerAbstract
 {
     private $title = 'Home';
     private $menuActive = '/home';
@@ -11,7 +11,7 @@ class HomeAction extends ControllerAbstract
      *
      * @return string
      */
-    public function index()
+    public function homeAction()
     {
         $flash = $this->getService('flash');
         // $this->container->logger->info("HomeController",[1,23]);

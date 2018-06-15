@@ -1,8 +1,8 @@
-<?php namespace App\Actions\Demo;
+<?php namespace App\Controllers\Base;
 
 use Core\Kernel\ControllerAbstract;
 
-class UsersAction extends ControllerAbstract
+class UsersController extends ControllerAbstract
 {
     private $title = 'Users';
     private $menuActive = '/users';

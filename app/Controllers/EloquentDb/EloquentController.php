@@ -6,36 +6,60 @@ class Eloquentcontroller {
 
     public function eloquentAction(){
 
-        $data= Person::find(1);
+        $person= Person::find(1);
 
-        $employee=  new Employee();
-        $employee->active= 0;
-        
-        // $data->employee()->save($employee);
-        
-        if($data->employee) {
-            $data->employee->user;
-            if ($data->employee->user) {
-                $data->employee->user->role;
-                if($data->employee->user->role)
+     
+        if($person->employee) {
+            if ($person->employee->user) {
+                if($person->employee->user->role)
                 {
-                    $data->employee->user->role->rights;
+                    $person->employee->user->role->rights;
                 }
             }
         }
-        echo $data; die;
+        $result[] =  $person; 
+       
+        /*******************************/
+        // update active status 
+        //
+       
+        if($person->employee) {
+            $person->employee->active= 0;
+            $person->employee->save();
+        }
+       
+       
+        // $employee=  new Employee();
+        // $employee->active= 0;
+        
+        // $person->employee()->save($employee);
+        
+        // $result[] = $employee; 
+        
+        //******************************** */
+
+
+        $person= Person::find(1);
+
+     
+        if($person->employee) {
+            if ($person->employee->user) {
+                $person->employee->user->role;
+            //     if($person->employee->user->role)
+            //     {
+            //         $person->employee->user->role->rights;
+            //     }
+            }
+        }
+        $result[] =  $person; 
+
+
+        echo json_encode($result);
+        
+        die;
         
     }
-
-
 }
-
-
-
-
-
-
-
 
 
 

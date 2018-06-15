@@ -1,11 +1,8 @@
 <?php
 
-$app->get('/', 'App\Actions\Demo\HomeAction:index')->setName('home');
-$app->get('/hello/{name}', 'App\Actions\Demo\HelloAction:index');
+$app->get('/', 'App\Controllers\Base\HomeController:homeAction')->setName('home');
 $app->get('/pos', 'App\Controllers\Modules\PosController:posAction');
 $app->get('/list', 'App\Actions\Demo\ListAction:index');
-$app->get('/blank', 'App\Actions\Demo\blankAction:index');
-$app->get('/headers', 'App\Actions\Demo\HeadersAction:index');
 
 // $app->map(['GET','POST'],'/users', 'App\Actions\Demo\UsersAction:getAllUsers')->setName('users');
 
