@@ -23,7 +23,8 @@
     "symfony/var-dumper": "^3.1",
     "monolog/monolog": "^1.21",
     "guzzlehttp/guzzle": "^6.3",
-    "dflydev/fig-cookies": "^1.0"
+    "dflydev/fig-cookies": "^1.0",
+    "illuminate/database": "^5.1"
   },
   "autoload": {
     "psr-4": {
