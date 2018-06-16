@@ -1,7 +1,7 @@
 <?php
 namespace Api\Models;
 
-class Humans extends \Illuminate\Database\Eloquent\Model {
+class Human extends \Illuminate\Database\Eloquent\Model {
 
     public $timestamps = false;
 

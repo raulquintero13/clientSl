@@ -97,7 +97,7 @@
     {% if readonly %}
         {% set path = path_for('employeeEdit',{'id':employee.id})  %}
     {% else %}
-        {% set path =  path_for('employeeSave',{'id':employee.id})  %}
+        {% set path =  path_for('apiemployeeSave',{'id':employee.id})  %}
     {% endif %}
     <form method="POST" action="{{ path }}">
         <input type="hidden" id="id" name="employee[id]" value="{{ employee.id }}">
@@ -205,8 +205,8 @@
                            <option value="1">Activo</option>
                            <option value="0" selected>Desactivado</option>
                            {% else %}
-                           <option value="1" >Activo</option>
-                           <option value="0" selected>Desactivado</option>
+                           <option value="1" selected>Activo</option>
+                           <option value="0" >Desactivado</option>
                         {% endif %}
                         
                 </select>
@@ -254,7 +254,6 @@
                 {# Two <input class="btn pull-right" value="test2"> #}
             </div>
         </div>
-    </form>
 
 </div>
 
@@ -262,7 +261,25 @@
 
 <div id="User" class="tabcontent">
 
-{% if employee.roles is defined %}
+
+         <div class="form-group row">
+            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">User Status</label>
+            <div class="col-sm-9">
+                <select {{ readonly }} id="user_active" name="employee[user_active]" class='form-control select2-me input-lg' style="width:250px;">
+                   
+                        {% if employee.user_active == 0 %}
+                           <option value="1">Activo</option>
+                           <option value="0" selected>Desactivado</option>
+                           {% else %}
+                           <option value="1" selected>Activo</option>
+                           <option value="0" >Desactivado</option>
+                        {% endif %}
+                        
+                </select>
+            </div>
+        </div>
+
+{% if employee.user_active == 1 %}
         <div class="form-group row">
             <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Role</label>
             <div class="col-sm-9">
@@ -277,46 +294,10 @@
                 </select>
             </div>
         </div>
-        </div><div class="form-group row">
-            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Gender</label>
-            <div class="col-sm-9">
-                <select {{ readonly }} id="gender_id" name="human[gender_id]" class='form-control select2-me input-lg' style="width:250px;">
-                    {% for gender in employee.genders %}
-                        <option value="{{ gender.id }}"
-                        {% if employee.human.gender_id == gender.id %}
-                            selected
-                        {% endif %}
-                        >{{ gender.gender|ucwords }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
         
         
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Sucursal</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="sucursal" name="employee[sucursal]" value="{{employee.sucursal|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="position_id" name="employee[position_id]" value="{{employee.position_id|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="employee[salary]" value="{{employee.salary|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Start Date</label>
-            <div class="col-sm-9">
-                <input type="date" {{ readonly }} class="form-control input-lg" id="startdate" name="employee[startdate]" value="{{employee.startdate|date("Y-m-d")}}">
-            </div>
-        </div>
+        
+        
         
         <div class="form-group row">
             <div class="col-sm-11 col-md-offset-1 ">

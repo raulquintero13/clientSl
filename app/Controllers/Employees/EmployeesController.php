@@ -25,16 +25,18 @@ class EmployeesController extends ControllerAbstract
         $params = ['id'=>$id];
         try {
             // $employee = $this->container->curl->post('http://serversl.local/api/user', $params);
-            $employee = $this->container->curl->post('http://serversl.local/api/employee?id=1', $params);
+            $employee = $this->container->curl->post('http://serversl.local/api/employee', $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
         }
-
+        // dump($employee);
+        // die;
 
         $edited = $request->getParam('edit');
 
         if (!$employee){
+            die('no encontro empleado');
             $flash->addMessage('edited','El Registro no existe');
             return $response->withRedirect($router->pathFor('employees'));
 
