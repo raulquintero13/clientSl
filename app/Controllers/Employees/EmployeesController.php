@@ -15,27 +15,28 @@ class EmployeesController extends ControllerAbstract
      *
      * @return string
      */
-    public function getUserById($id)
+    public function getEmployeeById($id)
     {
         $request = $this->getRequest();
         $response = $this->getResponse();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
-        $params = ['user'=>$id];
+        $params = ['id'=>$id];
         $messages = $flash->getMessages();
-
         try {
-            $user = $this->container->curl->post('http://serversl.local/api/user', $params);
+            // $employee = $this->container->curl->post('http://serversl.local/api/user', $params);
+            $employee = $this->container->curl->post('http://serversl.local/api/employee?id=1', $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
         }
-        
+
+
         $edited = $request->getParam('edit');
 
-        if (!$user){
+        if (!$employee){
             $flash->addMessage('edited','El Registro no existe');
-            return $response->withRedirect($router->pathFor('users'));
+            return $response->withRedirect($router->pathFor('employees'));
 
         }
 
@@ -45,12 +46,12 @@ class EmployeesController extends ControllerAbstract
             return $response->withRedirect($router->pathFor('users'));
         }else{
             // var_dump($request->getParam('edit'));die;
-            return $this->render('Employees/employees.twig', [
-                'title' => 'User: '.$user['firstname'].' '.$user['lastname'],
+            return $this->render('Employees/employee.twig', [
+                'title' => 'Employee: '.$user['firstname'].' '.$user['lastname'],
                 'menuActive' => $this->menuActive,
                 'userLogged' => $this->container->cookies->get('user'),
                 'id' => $id,
-                'user' => $user,
+                'employee' => $employee,
                 'readonly' => 'readonly',
                 'messages' => $messages 
             ]);
@@ -67,7 +68,7 @@ class EmployeesController extends ControllerAbstract
         $params = ['user'=>$id];
         
         try {
-            $user = $this->container->curl->post('http://serversl.local/api/user', $params);
+            $user = $this->container->curl->post('http://serversl.local/api/employee', $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
@@ -139,8 +140,8 @@ class EmployeesController extends ControllerAbstract
             $message_error [] = 'No tienes permiso par editar este registro.';
         }
 
-        return $this->render('Demo/user.twig', [
-            'title' => $this->title,
+        return $this->render('Employees/employee.twig', [
+            'title' => 'Employee: '.$user['firstname'].' '.$user['lastname'],
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
             'id' => $id,

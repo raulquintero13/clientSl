@@ -25,7 +25,7 @@ return [
     'db_illuminate' => [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'database' => 'orm',
+        'database' => 'store',
         'username' => 'root',
         'password' => 'root',
         'charset' => 'utf8',

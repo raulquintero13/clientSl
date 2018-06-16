@@ -35,7 +35,7 @@ class CurlPhp extends ServiceAbstract
         
         $fields_string = http_build_query( $fields );
         
-        $logger->info("CurlPhp::post", [$fields_string]);
+        $logger->info("CurlPhp::post", [$url,$fields_string]);
 
         // var_dump($fields_string);die;
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
@@ -43,9 +43,11 @@ class CurlPhp extends ServiceAbstract
         curl_setopt($this->ch, CURLOPT_POST,count($fields));
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $fields_string);
-       $response = curl_exec($this->ch);
-       $error = curl_error($this->ch);
-       $errno = curl_errno($this->ch);
+        $response = curl_exec($this->ch);
+        // $logger->info("CurlPhp::post", [$response]);
+        
+        $error = curl_error($this->ch);
+        $errno = curl_errno($this->ch);
         if (is_resource($this->ch)) {
             curl_close($this->ch);
         }

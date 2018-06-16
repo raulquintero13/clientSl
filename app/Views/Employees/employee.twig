@@ -94,57 +94,66 @@
 
 <div id="London" class="tabcontent">
   {% if readonly %}
-        {% set path = path_for('userEdit',{'id':id})  %}
+        {% set path = path_for('employeeEdit',{'id':id})  %}
     {% else %}
-        {% set path =  path_for('userSave',{'id':id})  %}
+        {% set path =  path_for('employeeSave',{'id':id})  %}
     {% endif %}
     <form method="POST" action="{{ path }}">
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">CURP</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{'qucr84939483jfdhfnm98'|upper}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{employee.human.curp|upper}}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Gender</label>
+            <div class="col-sm-9">
+                <select name="s2" {{ readonly }} id="s2" class='form-control select2-me input-lg' style="width:250px;">
+                    <option value="1">Femenino</option>
+                    <option value="2" selected>Masculino</option>
+                </select>
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{user.firstname|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{employee.human.firstname|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Middle Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.lastname|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{employee.human.middle_name|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Last Name</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.lastname|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{employee.human.last_name|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Email</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{user.position|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{employee.human.email|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Zip Code</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="city" name="city" value="{{user.city}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="city" name="city" value="{{employee.human.zipcode}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Address</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="startdate" name="startdate" value="{{user.city}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="startdate" name="startdate" value="{{employee.human.address}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Brithdate</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="salary" value="{{user.startdate}}">
+                <input type="date" {{ readonly }} class="form-control input-lg" id="salary" name="salary" value="{{employee.human.birthdate}}">
             </div>
         </div>
         <div class="form-group row">
@@ -177,36 +186,36 @@
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">NSS</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{213232434|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="firstname" name="firstname" value="{{employee.nss|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Status</label>
             <div class="col-sm-9">
-                    <select name="s2" {{ readonly }} id="s2" class='form-control select2-me input-lg' style="width:250px;">
-                        <option value="01">Activo</option>
-                        <option value="02">Inactivo</option>
-                    </select>
-                </div>
+                <select name="s2" {{ readonly }} id="s2" class='form-control select2-me input-lg' style="width:250px;">
+                    <option value="1">Activo</option>
+                    <option value="2" selected>Inactivo</option>
+                </select>
             </div>
+        </div>
         
         
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Sucursal</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.city|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{employee.sucursal|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{user.position|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="lastname" name="lastname" value="{{employee.position_id|ucwords}}">
             </div>
         </div>
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{user.salary|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="position" name="position" value="{{employee.sueldo|ucwords}}">
             </div>
         </div>
         
@@ -321,7 +330,7 @@
 document.getElementById("back").addEventListener("click", regresar);
 
 function regresar(){
-     window.location.href='http://clientsl.local/system/users';
+     window.location.href='http://clientsl.local/application/employees';
 }
 
 </script>

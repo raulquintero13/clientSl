@@ -25,6 +25,9 @@ class AuthMiddleware extends MiddlewareAbstract
             case '/login':
                 $public = true;
                 break;
+            case '/api/employee':
+                $public = true;
+                break;
             case '/api/user':
                 $public = true;
                 break;

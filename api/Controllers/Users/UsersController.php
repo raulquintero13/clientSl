@@ -17,7 +17,7 @@ class UsersController extends ControllerAbstract
 
 
 
-      $id =$request->getParam('user');
+      $id =$request->getParam('id');
       if(isset($users[$id])){
       $user = [
         'firstname' => $users[$id][0],
@@ -33,7 +33,7 @@ class UsersController extends ControllerAbstract
       // $User->set($user);      
       // $user = $User->toArray();
 
-      $this->container->logger->info("api-auth:agent", [$id]);
+      $this->container->logger->info("api-employee:agent", [$id]);
     
       
       return $response->withJson($user,200);
@@ -79,7 +79,7 @@ class UsersController extends ControllerAbstract
 
       foreach($array as $key=>$value){
         foreach($value as $k=>$v){
-          $value[$k] = '<a href="/system/user/'.$key.'">'.ucwords($v).'</a>';
+          $value[$k] = '<a href="/application/employee/'.$key.'">'.ucwords($v).'</a>';
         }
         $array[$key] = $value;
       }
