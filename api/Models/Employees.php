@@ -9,6 +9,6 @@ class Employees extends \Illuminate\Database\Eloquent\Model {
         return $this->belongsTo(Humans::class);
     }
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->hasOne(Users::class);
     }
 }

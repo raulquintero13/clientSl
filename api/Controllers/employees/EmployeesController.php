@@ -2,7 +2,7 @@
 
 use Core\Kernel\ControllerAbstract;
 use Core\Libraries\Database\SimplePDO;
-use Api\Models\Employees;
+use Api\Models\{Employees,Genders,Roles};
 // use Api\Models\;
 
 class EmployeesController extends ControllerAbstract
@@ -15,8 +15,17 @@ class EmployeesController extends ControllerAbstract
       $response = $this->getResponse();
 
       $employee = Employees::find(1);
-
+      $genders = Genders::all();
+      $roles = Roles::all();
       if($employee->human) {  }
+
+      if($employee->user) { 
+
+
+       }
+
+
+      $employee = (array_merge(json_decode($employee,1),['genders'=>json_decode($genders,1)]));
 
       $id =$request->getParam('id');
       $this->container->logger->info("api-auth:agent", [$id,$request->getUri()]);

@@ -21,8 +21,8 @@ class EmployeesController extends ControllerAbstract
         $response = $this->getResponse();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
-        $params = ['id'=>$id];
         $messages = $flash->getMessages();
+        $params = ['id'=>$id];
         try {
             // $employee = $this->container->curl->post('http://serversl.local/api/user', $params);
             $employee = $this->container->curl->post('http://serversl.local/api/employee?id=1', $params);
@@ -65,7 +65,7 @@ class EmployeesController extends ControllerAbstract
         $response = $this->getResponse();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
-        $params = ['user'=>$id];
+        $params = ['id'=>$id];
         
         try {
             $user = $this->container->curl->post('http://serversl.local/api/employee', $params);
@@ -130,7 +130,14 @@ class EmployeesController extends ControllerAbstract
         $flash = $this->getService('flash');
 
  
-        $user = $request->getParams();
+        $id = $request->getParam('id');
+        $params = ['id'=>$id];
+        try {
+            $employee = $this->container->curl->post('http://serversl.local/api/employee?id=1', $params);
+        } catch (\RuntimeException $ex) {
+            $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
+            // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
+        }
 
         $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
         
@@ -145,7 +152,7 @@ class EmployeesController extends ControllerAbstract
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
             'id' => $id,
-            'user' => $user,
+            'employee' => $employee,
             'readonly' => $readonly,
             'message_error' => $message_error
         ]);
@@ -161,8 +168,10 @@ class EmployeesController extends ControllerAbstract
         $response = $this->getService('response');
         $router =  $this->getRouter();
 
-        $user = $request->getParams();
+        $employee = $request->getParams();
 
+            dump($employee);die;
+        
         $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
         return $response->withRedirect($router->pathFor('user',['id' => $id]));
         // $this->router->pathFor('author', ['author_id' => $author->id])
