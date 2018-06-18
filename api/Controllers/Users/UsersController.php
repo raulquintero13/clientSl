@@ -29,9 +29,7 @@ class UsersController extends ControllerAbstract
 
       ];
     }
-      // ToDo uncomment for production  /////
-      // $User->set($user);      
-      // $user = $User->toArray();
+      
 
       $this->container->logger->info("api-employee:agent", [$id]);
     

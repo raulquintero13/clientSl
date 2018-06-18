@@ -3,7 +3,6 @@
 use Core\Kernel\ControllerAbstract;
 use Core\Libraries\Database\SimplePDO;
 use Api\Models\{Human,User,Employee,Gender,Role};
-// use Api\Models\;
 
 class EmployeesController extends ControllerAbstract
 {
@@ -12,8 +11,10 @@ class EmployeesController extends ControllerAbstract
     public function getById(){
       $request = $this->getRequest();
       $response = $this->getResponse();
+      $id = $request->getParam('id');
 
-      $employee = Employee::find(1);
+
+      $employee = Employee::find($id);
       $genders = Gender::all();
       $roles = Role::all();
       if($employee->human) {  }
@@ -23,15 +24,20 @@ class EmployeesController extends ControllerAbstract
         
       }
       // echo $roles;die;
+
+      $employee = $employee->toArray();
+
       
-      $employee = (array_merge(json_decode($employee,1),['genders'=>json_decode($genders,1)]));
+      
+      $employee = (array_merge($employee,['genders'=>json_decode($genders,1)]));
       $employee = (array_merge($employee,['roles'=>json_decode($roles,1)]));
+      // dd($employee);
       // $employee = (array_merge(json_decode($employee,1),['user'=>json_decode(User::where('employee_id',1)->get(),1)]));
       
       // dump($employee);die;
 
       $id =$request->getParam('id');
-      $this->container->logger->info("api-auth:agent", [$id,User::find(2)]);
+      $this->container->logger->info("api-auth:agent", [$id,Employee::find(1)]);
       
       return $response->withJson($employee,200);
     }
@@ -70,22 +76,16 @@ class EmployeesController extends ControllerAbstract
       $human->address_id = isset($empData['human']['address_id'])?$empData['human']['address_id']:$human->address_id;
       $human->gender_id = isset($empData['human']['gender_id'])?$empData['human']['gender_id']:$human->gender_id;
 
-      $user->password = isset($empData['user']['gender_id'])?$empData['user']['gender_id']:$user->password_id;
-      $user->rights = isset($empData['user']['gender_id'])?$empData['user']['gender_id']:$user->rights_id;
+      $user->password = isset($empData['user']['password'])?$empData['user']['password']:$user->password_id;
+      $user->rights = isset($empData['user']['rights'])?$empData['user']['rights']:$user->rights_id;
       $user->role_id = isset($empData['user']['role_id'])?$empData['user']['role_id']:$user->role_id;
 
       $employee->save();
       $human->save();
-      $user->save();
+      // $user->save();
 
-      // echo "<pre>";
-      //     echo $human;      
-      // echo "<pre>";
           
-          // echo $employee->id;die;
-
-      
-      $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
+      $flash->addMessage('edited','El Registro de '.strtoupper( $human->first_name).' fue actualizado.');
       return $response->withRedirect($router->pathFor('employee',['id' => $employee->id]));
       // $this->router->pathFor('author', ['author_id' => $author->id])
   }
@@ -103,8 +103,11 @@ class EmployeesController extends ControllerAbstract
 
       // $users = require 'users.php';
       
-      $employeesObj = Employee::with('human')->skip(0)->take(10 )->get();
-      // $employeesObj->human;
+      $employeesArr = Employee::with('human')->skip(0)->take(10 )->get()->toArray();
+
+      $employees =  Human::join('employees','humans.id','=','employees.human_id' )->
+        select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->get();
+
 
     /*   '0'=>[
         "draw" => $_GET['draw'],
@@ -127,11 +130,13 @@ class EmployeesController extends ControllerAbstract
       $employees = [
         "draw" => $_GET['draw'],
         "recordsTotal" => Employee::count(),
-        "recordsFiltered" => 1,
-        'data' => $employeesObj->toArray()
+        "recordsFiltered" => 2,
+        'data' => $this->_arrayToLinks($employees->toArray())
       ];
-
-      // $employees = $employeesObj->toArray();
+// dd($employees);
+      // $employeesArr = $this->_arrayToLinks($employeesArr); 
+      // $data =  Human::where('humans.id',1)->join('employees','humans.id','=','employees.human_id' )->
+      // select('humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->get();
 
       $logger = $this->getService('logger');
       $logger->info("users::", [$_GET,$employees]);
@@ -150,15 +155,32 @@ class EmployeesController extends ControllerAbstract
 
     
     private function _arrayToLinks($array){
-
+      
       foreach($array as $key=>$value){
-        foreach($value as $k=>$v){
-          $value[$k] = '<a href="/application/employee/'.$key.'">'.ucwords($v).'</a>';
-        }
-        $array[$key] = $value;
+        $employees[] = [
+          $value['id'],
+          $value['first_name'],
+          $value['middle_name'],
+          $value['last_name'],
+          $value['startdate'],
+          $value['status']
+        ];
+        
       }
+      
+      // dd($employees);
+      $array = $employees;
+      
+      foreach($array as $key=>$value){
 
-      return  $array;
+          foreach($value as $k=>$v){
+            $employee[] = '<a href="/application/employee/'.$value[0].'">'.ucwords($v).'</a>';
+          }
+          $employees[$key] = $employee;
+          $employee = [];
+          }
+          // dd($employees);
+      return  $employees;
 
     }
 
