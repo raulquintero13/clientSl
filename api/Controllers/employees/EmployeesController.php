@@ -4,6 +4,8 @@ use Core\Kernel\ControllerAbstract;
 use Core\Libraries\Database\SimplePDO;
 use Api\Models\{Human,User,Employee,Gender,Role};
 
+use Illuminate\Support\Facades\DB;
+
 class EmployeesController extends ControllerAbstract
 {
 
@@ -114,20 +116,21 @@ class EmployeesController extends ControllerAbstract
       
       $employeesArr = Employee::with('human')->skip(0)->take(10)->get()->toArray();
 
+      // dd( $employeesArr);
+
       $search = $request->getParam('search');
       $order = $request->getParam('order')[0];
       $start = $request->getParam('start');
-      $take = $request->getParam('lenght');
+      $take = $request->getParam('length');
       // var_dump($search);die;
 
       // if ($search['value']){
       //   die($search);
       // }
-
       $employeesObj =  Employee::where('humans.first_name', 'like', '%' . $search['value'] . '%')->
         leftjoin('humans','humans.id','=','employees.human_id' )->
         select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
-        orderBy($fields[$order['column']],$order['dir'])->take($take)->get();
+        orderBy($fields[$order['column']],$order['dir'])->take(intval($take))->skip(intval($skip))->get();
 
       $employees = [
         "draw" => $_GET['draw'],
