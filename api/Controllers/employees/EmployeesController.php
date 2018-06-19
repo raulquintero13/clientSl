@@ -4,7 +4,8 @@ use Core\Kernel\ControllerAbstract;
 use Core\Libraries\Database\SimplePDO;
 use Api\Models\{Human,User,Employee,Gender,Role};
 
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB as DB;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class EmployeesController extends ControllerAbstract
 {
@@ -130,7 +131,8 @@ class EmployeesController extends ControllerAbstract
       //   die($search);
       // }
       // where('humans.first_name', 'like', '\'%' . $search['value'] . '%\'')->
-      $employeesObj =  Employee::where('humans.first_name', 'like', '%' . $search['value'] . '%')->
+      $employeesObj =  Employee::where(DB::raw("CONCAT(humans.first_name,' ',humans.middle_name,' ',humans.last_name)"), 'like', '%' . $search['value'] . '%')->
+        orWhere(DB::raw("CONCAT(humans.middle_name,' ',humans.last_name,' ',humans.first_name)"), '%' . $search['value'] . '%')->
         join('humans','humans.id','=','employees.human_id' )->
         select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
         orderBy($column,$order['dir'])->
@@ -158,6 +160,11 @@ class EmployeesController extends ControllerAbstract
       
       $employees['draw']=$_GET['draw'];
 
+      
+      if(!$employees['data']) {
+        $employees['data'] = [];
+        $this->container->logger->info("api-auth:agent-employees", [$employees]);
+      }
       return $response->withJson($employees, $code);
 
 

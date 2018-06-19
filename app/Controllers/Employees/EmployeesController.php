@@ -36,7 +36,7 @@ class EmployeesController extends ControllerAbstract
         $edited = $request->getParam('edit');
 
         if (!$employee){
-            die('no encontro empleado');
+            // die('no encontro empleado');
             $flash->addMessage('edited','El Registro no existe');
             return $response->withRedirect($router->pathFor('employees'));
 
