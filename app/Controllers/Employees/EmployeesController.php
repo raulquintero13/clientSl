@@ -54,7 +54,7 @@ class EmployeesController extends ControllerAbstract
                 'userLogged' => $this->container->cookies->get('user'),
                 'id' => $id,
                 'employee' => $employee,
-                'readonly' => 'readonly',
+                'readonly' => 'disabled',
                 'messages' => $messages 
             ]);
         }

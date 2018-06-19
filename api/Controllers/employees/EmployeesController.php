@@ -34,7 +34,6 @@ class EmployeesController extends ControllerAbstract
       // dd($employee);
       // $employee = (array_merge(json_decode($employee,1),['user'=>json_decode(User::where('employee_id',1)->get(),1)]));
       
-      // dump($employee);die;
 
       $id =$request->getParam('id');
       $this->container->logger->info("api-auth:agent", [$id,Employee::find(1)]);
@@ -82,7 +81,7 @@ class EmployeesController extends ControllerAbstract
 
       $employee->save();
       $human->save();
-      // $user->save();
+      $user->save();
 
           
       $flash->addMessage('edited','El Registro de '.strtoupper( $human->first_name).' fue actualizado.');
@@ -99,16 +98,61 @@ class EmployeesController extends ControllerAbstract
      */
     public function getAll()
     {
+      $request = $this->getRequest();
       $response = $this->getResponse();
 
       // $users = require 'users.php';
+
+      $fields = [
+          0=>'humans.id',
+          1=>'humans.first_name',
+          2=>'humans.middle_name',
+          3=>'humans.last_name',
+          4=>'employees.startdate',
+          5=>'status',
+      ];
       
-      $employeesArr = Employee::with('human')->skip(0)->take(10 )->get()->toArray();
+      $employeesArr = Employee::with('human')->skip(0)->take(10)->get()->toArray();
 
-      $employees =  Human::join('employees','humans.id','=','employees.human_id' )->
-        select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->get();
+      $search = $request->getParam('search');
+      $order = $request->getParam('order')[0];
+      $start = $request->getParam('start');
+      $take = $request->getParam('lenght');
+      // var_dump($search);die;
+
+      // if ($search['value']){
+      //   die($search);
+      // }
+
+      $employeesObj =  Employee::where('humans.first_name', 'like', '%' . $search['value'] . '%')->
+        leftjoin('humans','humans.id','=','employees.human_id' )->
+        select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
+        orderBy($fields[$order['column']],$order['dir'])->take($take)->get();
+
+      $employees = [
+        "draw" => $_GET['draw'],
+        "recordsTotal" => Employee::count(),
+        "recordsFiltered" => count($this->_arrayToLinks($employeesObj->toArray())),
+        'data' => $this->_arrayToLinks($employeesObj->toArray())
+      ];
+
+      $this->container->logger->info("api-auth:agent", [$take,$order]);
+
+      // $employeesArr = $this->_arrayToLinks($employeesArr); 
+      // $data =  Human::where('humans.id',1)->join('employees','humans.id','=','employees.human_id' )->
+      //    select('humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->get();
+
+      $logger = $this->getService('logger');
+      $logger->info("users::", [$_GET,$employees]);
+      
+      $code = 200;
+      
+      $employees['draw']=$_GET['draw'];
+
+      return $response->withJson($employees, $code);
 
 
+        // return array example
     /*   '0'=>[
         "draw" => $_GET['draw'],
         "recordsTotal" => 30,
@@ -126,36 +170,12 @@ class EmployeesController extends ControllerAbstract
             ["Cedric","Kelly","Senior Javascript Developer","Edinburgh", "29th Mar 12", "$433,060"]
         ]
       ]*/
-
-      $employees = [
-        "draw" => $_GET['draw'],
-        "recordsTotal" => Employee::count(),
-        "recordsFiltered" => 2,
-        'data' => $this->_arrayToLinks($employees->toArray())
-      ];
-// dd($employees);
-      // $employeesArr = $this->_arrayToLinks($employeesArr); 
-      // $data =  Human::where('humans.id',1)->join('employees','humans.id','=','employees.human_id' )->
-      // select('humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->get();
-
-      $logger = $this->getService('logger');
-      $logger->info("users::", [$_GET,$employees]);
-      
-      $code = 200;
-      
-      // $users[$_GET['start']]['data'] = $this->_arrayToLinks($users[$_GET['start']]['data']);
-      
-      $employees['draw']=$_GET['draw'];
-
-      //  echo json_encode($users[$_GET['start']]);
-
-      return $response->withJson($employees, $code);
-
     }
 
     
     private function _arrayToLinks($array){
       
+      // moviendo el indice del arreglo asociativo
       foreach($array as $key=>$value){
         $employees[] = [
           $value['id'],
