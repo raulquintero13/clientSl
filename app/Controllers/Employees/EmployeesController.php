@@ -15,7 +15,7 @@ class EmployeesController extends ControllerAbstract
      *
      * @return string
      */
-    public function getEmployeeById($id)
+    public function getById($id)
     {
         $request = $this->getRequest();
         $response = $this->getResponse();
@@ -105,7 +105,7 @@ class EmployeesController extends ControllerAbstract
         ]);
     }
 
-    public function newUser(){
+    public function new(){
 
         $request = $this->getRequest();
         $response = $this->getResponse();
@@ -117,14 +117,14 @@ class EmployeesController extends ControllerAbstract
 
     
 
-        return $this->render('Base/userNew.twig', [
+        return $this->render('Employees/employeeNew.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             
         ]);
     }
 
-    public function editUserById($id){
+    public function edit($id){
 
         $request = $this->getRequest();
         $response = $this->getResponse();
@@ -163,7 +163,7 @@ class EmployeesController extends ControllerAbstract
 
 
 
-    public function saveUserById($id){
+    public function save($id){
 
         $request = $this->getRequest();
         $flash = $this->getService('flash');
@@ -186,7 +186,7 @@ class EmployeesController extends ControllerAbstract
      *
      * @return string
      */
-    public function getAllUsers()
+    public function getAll()
     {
         // try {
         //     $curl = $this->container->curl->post('http://clientsl.local/mant/headers', array("params" => $params));
