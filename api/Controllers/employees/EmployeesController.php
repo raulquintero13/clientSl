@@ -130,7 +130,7 @@ class EmployeesController extends ControllerAbstract
       $employeesObj =  Employee::where('humans.first_name', 'like', '%' . $search['value'] . '%')->
         leftjoin('humans','humans.id','=','employees.human_id' )->
         select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
-        orderBy($fields[$order['column']],$order['dir'])->take(intval($take))->skip(intval($skip))->get();
+        orderBy($fields[$order['column']],$order['dir'])->take($take)->skip($skip)->get();
 
       $employees = [
         "draw" => $_GET['draw'],
