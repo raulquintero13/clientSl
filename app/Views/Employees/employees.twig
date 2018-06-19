@@ -30,7 +30,10 @@ https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js #}
            
             "processing": true,
             "serverSide": true,
-            "ajax": 'http://clientsl.local/api/employees',
+            "ajax": {
+                url: 'http://clientsl.local/api/employees',
+                dataSrc: 'data'
+            },
             "language": {
                 "processing": "<img src='/assets/imgs/loading3.gif'>",
                 //"sProcessing":     "Procesando...",
@@ -51,6 +54,7 @@ https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js #}
                     "sNext":     "Siguiente",
                     "sPrevious": "Anterior"
                 },
+                
                 "oAria": {
                     "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"

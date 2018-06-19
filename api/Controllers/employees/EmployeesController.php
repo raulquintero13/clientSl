@@ -114,23 +114,29 @@ class EmployeesController extends ControllerAbstract
           5=>'status',
       ];
       
-      $employeesArr = Employee::with('human')->skip(0)->take(10)->get()->toArray();
+      // $employeesArr = Employee::with('human')->skip(0)->take(10)->get()->toArray();
 
       // dd( $employeesArr);
 
       $search = $request->getParam('search');
       $order = $request->getParam('order')[0];
-      $start = $request->getParam('start');
+      $skip = $request->getParam('start');
       $take = $request->getParam('length');
+
+      $column = $fields[$order['column']];
       // var_dump($search);die;
 
       // if ($search['value']){
       //   die($search);
       // }
+      // where('humans.first_name', 'like', '\'%' . $search['value'] . '%\'')->
       $employeesObj =  Employee::where('humans.first_name', 'like', '%' . $search['value'] . '%')->
-        leftjoin('humans','humans.id','=','employees.human_id' )->
+        join('humans','humans.id','=','employees.human_id' )->
         select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
-        orderBy($fields[$order['column']],$order['dir'])->take($take)->skip($skip)->get();
+        orderBy($column,$order['dir'])->
+        take($take)->skip($skip)->get();
+        // orderBy($column,$order['dir'])->
+        // dd($employeesObj->toArray());
 
       $employees = [
         "draw" => $_GET['draw'],
