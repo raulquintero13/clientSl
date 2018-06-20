@@ -16,6 +16,7 @@ $app->get('/eloquent','App\Controllers\EloquentDb\EloquentController:eloquentAct
 $app->get('/application/clients', 'App\Controllers\Clients\ClientsController:getAllUsers')->setName('clients');
 
 
+
 $app->get( '/application/employees',            'App\Controllers\Employees\EmployeesController:getAll')->setName('employees');
 $app->get( '/application/employee/{id:[0-9]+}', 'App\Controllers\Employees\EmployeesController:getById')->setName('employee');
 $app->post('/application/employee/edit/{id}',   'App\Controllers\Employees\EmployeesController:edit')->setName('employeeEdit');
