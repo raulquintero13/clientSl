@@ -134,11 +134,15 @@ class EmployeesController extends ControllerAbstract
       $employeesObj =  Employee::where(DB::raw("CONCAT(humans.first_name,' ',humans.middle_name,' ',humans.last_name)"), 'like', '%' . $search['value'] . '%')->
         orWhere(DB::raw("CONCAT(humans.middle_name,' ',humans.last_name,' ',humans.first_name)"), '%' . $search['value'] . '%')->
         join('humans','humans.id','=','employees.human_id' )->
-        select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
+        // select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
         orderBy($column,$order['dir'])->
-        take($take)->skip($skip)->get();
+        take($take)->skip($skip)->get(['employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status']);
         // orderBy($column,$order['dir'])->
         // dd($employeesObj->toArray());
+
+
+      $this->container->logger->info("api-auth:agent", [$employeesObj->toArray(),$order]);
+
 
       $employees = [
         "draw" => $_GET['draw'],
@@ -147,7 +151,6 @@ class EmployeesController extends ControllerAbstract
         'data' => $this->_arrayToLinks($employeesObj->toArray())
       ];
 
-      $this->container->logger->info("api-auth:agent", [$take,$order]);
 
       // $employeesArr = $this->_arrayToLinks($employeesArr); 
       // $data =  Human::where('humans.id',1)->join('employees','humans.id','=','employees.human_id' )->
@@ -169,7 +172,7 @@ class EmployeesController extends ControllerAbstract
 
 
         // return array example
-    /*   '0'=>[
+      /*'0'=>[
         "draw" => $_GET['draw'],
         "recordsTotal" => 30,
         "recordsFiltered" => 30,
