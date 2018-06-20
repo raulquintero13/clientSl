@@ -2,10 +2,10 @@
 
 return [
   		// default db connection settings
-    'dev' => [
+    'orm' => [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'database' => 'pos',
+        'database' => 'orm',
         'user' => 'root',
         'password' => 'root',
         'charset' => 'utf8',

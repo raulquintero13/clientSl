@@ -64,7 +64,7 @@
 
 {% if messages.edited is defined %}
     {% for message in messages.edited %}
-<div class="alert  alert-success " >
+<div id="alertdiv" class="alert  alert-success " >
 {{message}}
     </div>
     {% endfor %}
@@ -437,5 +437,13 @@ function openCity(evt, cityName) {
 
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
+
+ setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+
+      $("#alertdiv").remove();
+
+    }, 4000);
+
 </script>
     {% endblock %}
