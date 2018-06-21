@@ -1,4 +1,4 @@
-{% extends 'Demo/Base.twig' %}
+{% extends 'Demo/humanNew.twig' %}
 
 {# {% block navigation %}
    
@@ -9,64 +9,53 @@
 
 {% block head %}{% endblock %}
 
-{% block container %}
-<div class="container text-left ">
-    {% if messages is defined %}
-        {% for message in messages %}
-            <div class="alert  alert-success ">
-                {{message}}
+  
+{% block title_page %}New Employee{% endblock %}
 
-            </div>
-        {% endfor %}
-    {% endif %}
-
-    <h1>New Employee</h1>
-    <br><br>
-
-
-    <div class="box-content">
-        <form action="#" method="POST" class='form-horizontal'>
+{% block typeHuman %}
+            
             <div class="form-group">
-                <label for="textfield" class="control-label col-sm-2">Curp</label>
+                <label for="nss" class="control-label col-sm-2">NSS</label>
                 <div class="col-sm-10">
-                    <input type="text" name="textfield" id="textfield" class="form-control">
-                    <span class="help-block">This is just a supporting text</span>
+                    <input type="text" name="employee[nss]" id="nss" class="form-control">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="textfield" class="control-label col-sm-2">Name</label>
-                <div class="col-sm-10">
-                    <input type="text" name="textfield" id="textfield" class="form-control">
-                    <span class="help-block">This is just a supporting text</span>
-                </div>
+           <div class="form-group">
+            <label for="sucursal" class="control-label col-sm-2">Sucursal</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input-lg" id="sucursal" name="employee[sucursal]" value="">
             </div>
-            <div class="form-group">
-                <label for="textfield" class="control-label col-sm-2">Middle Name</label>
-                <div class="col-sm-10">
-                    <input type="text" name="textfield" id="textfield" class="form-control">
-                    <span class="help-block">This is just a supporting text</span>
-                </div>
+        </div>
+        <div class="form-group ">
+            <label for="position" class="control-label col-sm-2">Position</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input-lg" id="position_id" name="employee[position_id]" value="">
             </div>
-            <div class="form-group">
-                <label for="textfield" class="control-label col-sm-2">Last Name</label>
-                <div class="col-sm-10">
-                    <input type="text" name="textfield" id="textfield" class="form-control">
-                    <span class="help-block">This is just a supporting text</span>
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="salary" class="control-label col-sm-2">Salary</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control input-lg" id="salary" name="employee[salary]" value="">
             </div>
+        </div>
+        <div class="form-group">
+            <label for="textfield" class="col-sm-2 control-label">Role</label>
+            <div class="col-sm-10">
+                <select  id="role_id" name="user[role_id]" class="form-control select2-me input-lg" style="width:250px;">
+                                            <option value="1">Admin</option>
+                                            <option value="2" selected="">It</option>
+                                    </select>
+            </div>
+        </div>
+        
+         
            
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn">Cancel</button>
-            </div>
-        </form>
-    </div>
-
-
-
-
-</div>
-
 {% endblock %}
+
+
+
+
+
+
 
 {% block scripts %}{% endblock %}
