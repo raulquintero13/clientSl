@@ -111,17 +111,47 @@ class EmployeesController extends ControllerAbstract
         $response = $this->getResponse();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
-        $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
+        // $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
  
         $params = $request->getParams();
 
-    
+        
 
         return $this->render('Employees/employeeNew.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
+            'action' => '/application/employees/create',
+            'data'
             
         ]);
+    }
+
+    
+    public function create(){
+
+        $request = $this->getRequest();
+        $response = $this->getResponse();
+        $router = $this->getRouter();
+        $flash = $this->getService('flash');
+        $flash->addMessage('form_create','El Registro se hacreado satisfactoriamente.');
+ 
+        $params = $request->getParams();
+        $form_error = false;
+        foreach($params as $values){
+            foreach($values as $fields=>$table){
+                if(isset($table[$field])){
+                    $flash->addMessage('form_field_'.$key.'_error','Campo Requerido');
+                    $form_error = true;
+                }
+            }
+        }
+
+        if ($form_error){
+            return $response->withRedirect($router->pathFor('employeeNew',['data' => $params]));
+        }
+
+        dd ($params);
+        return $response->withRedirect($router->pathFor('user',['id' => 1]));
     }
 
     public function edit($id){

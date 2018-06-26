@@ -11,12 +11,12 @@ class EmployeesController extends ControllerAbstract
 {
 
 
-    public function getById(){
+    public function getById($id){
       $request = $this->getRequest();
       $response = $this->getResponse();
-      $id = $request->getParam('id');
+      $id = isset($id) ? $id : $request->getParam('id') ;
 
-
+      
       $employee = Employee::find($id);
       $genders = Gender::all();
       $roles = Role::all();
