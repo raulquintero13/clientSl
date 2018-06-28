@@ -11,14 +11,14 @@
 
 {% block container %}
 <div class="container text-left ">
-    {% if messages is defined %}
-        {% for message in messages %}
+    {# {% if messages is defined %}
+        {% for message.error in messages %}
             <div class="alert  alert-success ">
                 {{message}}
 
             </div>
         {% endfor %}
-    {% endif %}
+    {% endif %} #}
 
     <h1>{% block title_page %}{% endblock %}</h1>
     <br><br>
@@ -30,32 +30,55 @@
                 <label for="textfield" class="control-label col-sm-2">Curp</label>
                 <div class="col-sm-10">
                     <input type="text" name="human[curp]" id="curp" class="form-control">
-                    <span class="help-block">This is just a supporting text</span>
+                    {% if messages.form_employee_new_curp is defined  %}
+                        {% for message in messages.form_employee_new_curp %}
+                       <div class="error-help-block">{{ message|ucwords }}</div>
+                       {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="form-group">
                 <label for="textfield" class="control-label col-sm-2">Name</label>
                 <div class="col-sm-10">
                     <input type="text" name="human[first_name]" id="name" class="form-control">
-                    <span class="help-block"></span>
+                    {% if messages.form_employee_new_first_name is defined  %}
+                        {% for message in messages.form_employee_new_first_name %}
+                       <div class="error-help-block">{{ message|ucwords }}</div>
+                       {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="form-group">
                 <label for="textfield" class="control-label col-sm-2">Middle Name</label>
                 <div class="col-sm-10">
                     <input type="text" name="human[middle_name]" id="middle_name" class="form-control">
+                    {% if messages.form_employee_new_middle_name is defined  %}
+                        {% for message in messages.form_employee_new_middle_name %}
+                       <div class="error-help-block">{{ message|ucwords }}</div>
+                       {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="form-group">
                 <label for="textfield" class="control-label col-sm-2">Last Name</label>
                 <div class="col-sm-10">
                     <input type="text" name="human[last_name]" id="last_name" class="form-control">
+                    {% if messages.form_employee_new_last_name is defined  %}
+                        {% for message in messages.form_employee_new_last_name %}
+                       <div class="error-help-block">{{ message|ucwords }}</div>
+                       {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="form-group">
                 <label for="textfield" class="control-label col-sm-2">email</label>
                 <div class="col-sm-10">
                     <input type="text" name="human[email]" id="email" class="form-control">
+                    {% if messages.form_employee_new_email is defined  %}
+                        {% for message in messages.form_employee_new_email %}
+                       <div class="error-help-block">{{ message|ucwords }}</div>
+                       {% endfor %}
+                    {% endif %}
                 </div>
             </div>
            {% block typeHuman %}

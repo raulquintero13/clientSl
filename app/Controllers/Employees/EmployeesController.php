@@ -6,9 +6,16 @@ class EmployeesController extends ControllerAbstract
 {
     private $title = 'Users';
     private $menuActive = '/users';
+    private $flash;
 
 
+    public function __construct(\Interop\Container\ContainerInterface $container)
+    {
+        $this->flash = $container->flash;
 
+        parent::__construct($container);
+        
+    }
 
     /**
      * Index Action
@@ -115,13 +122,14 @@ class EmployeesController extends ControllerAbstract
  
         $params = $request->getParams();
 
-        
-
-        return $this->render('Employees/employeeNew.twig', [
+        $messages = $flash->getMessages();
+        // dd($messages);
+     return $this->render('Employees/employeeNew.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             'action' => '/application/employees/create',
-            'data'
+            'data' => $params,
+            'messages' => $messages,
             
         ]);
     }
@@ -133,24 +141,16 @@ class EmployeesController extends ControllerAbstract
         $response = $this->getResponse();
         $router = $this->getRouter();
         $flash = $this->getService('flash');
-        $flash->addMessage('form_create','El Registro se hacreado satisfactoriamente.');
+        // $flash->addMessage('form_create','El Registro se hacreado satisfactoriamente.');
  
         $params = $request->getParams();
-        $form_error = false;
-        foreach($params as $values){
-            foreach($values as $fields=>$table){
-                if(isset($table[$field])){
-                    $flash->addMessage('form_field_'.$key.'_error','Campo Requerido');
-                    $form_error = true;
-                }
-            }
-        }
-
-        if ($form_error){
+        $validator = $this->_validate($params);
+        // dd($params);        
+        if ($validator){
             return $response->withRedirect($router->pathFor('employeeNew',['data' => $params]));
         }
 
-        dd ($params);
+        // dd ($params);
         return $response->withRedirect($router->pathFor('user',['id' => 1]));
     }
 
@@ -232,7 +232,29 @@ class EmployeesController extends ControllerAbstract
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
             'messages' => $messages
-        ]);
+            ]);
+    }
+
+    private function _validate($elements){
+        $error = false;
+        foreach($elements as $element){
+            if (is_array($element)){
+                foreach($element as $field=>$value){
+                    if(empty($value)){
+                        $this->flash->addMessage('form_employee_new_'.$field, '* campo requerido');
+                        // $this->flash->addMessage('form_employee_new_'.$field, '* debe ser un curp valido');
+                        $error = true;
+                    } 
+                    // else {
+                    //     $this->flash->addMessage('form_employee_new_'.$field, null);
+                    // }
+                }
+            }
+        }
+        
+        // dd($error);
+        return $error;
+
     }
 
 }
