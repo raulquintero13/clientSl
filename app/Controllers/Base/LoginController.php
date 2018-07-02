@@ -18,7 +18,7 @@ class LoginController extends ControllerAbstract
         $this->container->cookies->destroy('user');
 
         // $_COOKIE['user'] = null;
-        return $this->render('Demo/Login/index.twig');
+        return $this->render('Base/Login/index.twig');
     }
 
     /**

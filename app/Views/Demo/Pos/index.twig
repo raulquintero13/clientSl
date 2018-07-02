@@ -143,14 +143,14 @@
     </div>
 {# </div> #}
     <div class="buttons hidden-xs">
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
-        <button type="button" class="btn btn-primary btn-lg">Primary</button>
+        <button type="button" class="btn btn-primary btn-lg">$ 20.00</button>
+        <button type="button" class="btn btn-primary btn-lg">$ 50.00</button>
+        <button type="button" class="btn btn-primary btn-lg">$ 100.00</button>
+        <button type="button" class="btn btn-primary btn-lg">$ 200.00</button>
+        <button type="button" class="btn btn-primary btn-lg">$ 500.00</button>
+        <button type="button" class="btn btn-primary btn-lg">Tarjeta</button>
+        <button type="button" class="btn btn-primary btn-lg">Credito</button>
+        <button type="button" class="btn btn-primary btn-lg">Info</button>
 
     </div>
 </div>
@@ -213,4 +213,19 @@ Capture Codigo
     <input id="id" class="form-control" id="inputdefault" type="text">
         
 <script src="/assets/js/main.js"></script>
+
 {% endblock %}
+
+
+{% block script %}
+<script>
+function PlaySound(soundObj) {
+  var sound = document.getElementById(soundObj);
+  sound.Play();
+}
+</script>
+
+<embed src="success.wav" autostart="false" width="0" height="0" id="sound1"
+enablejavascript="true">
+{% endblock %}
+{# PlaySound("sound1"); #}

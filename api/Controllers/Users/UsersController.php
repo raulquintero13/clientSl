@@ -3,6 +3,10 @@
 use Core\Kernel\ControllerAbstract;
 use Core\Libraries\Database\SimplePDO;
 
+use Api\Models\{Human,User,Employee,Gender,Role};
+// use Illuminate\Support\Facades\DB as DB;
+use Illuminate\Database\Capsule\Manager as DB;
+
 class UsersController extends ControllerAbstract
 {
 
@@ -11,6 +15,40 @@ class UsersController extends ControllerAbstract
 
       $request = $this->getRequest();
       $response = $this->getResponse();
+
+
+
+      // $employee->user->role;
+      
+      $user = User::find('1');
+      $employee = $user->employee;
+      $human  = $user->employee->human;
+
+      $genders = Gender::all();
+      $roles = Role::all();
+      
+      $user = $user->toArray();
+
+      
+      
+      $user = (array_merge($user,['genders'=>json_decode($genders,1)]));
+      $user = (array_merge($user,['roles'=>json_decode($roles,1)]));
+      // dd($employee);
+      // $employee = (array_merge(json_decode($employee,1),['user'=>json_decode(User::where('employee_id',1)->get(),1)]));
+      
+
+      $id =$request->getParam('id');
+      $this->container->logger->info("api-auth:agent", [$id,User::find(1)]);
+      
+      return $response->withJson($user,200);
+
+
+
+
+
+
+
+
 
       $users = require 'users.php';
       $users = array_merge($users['0']['data'],$users['10']['data']);
