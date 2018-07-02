@@ -162,12 +162,12 @@ class EmployeesController extends ControllerAbstract
         $flash = $this->getService('flash');
 
  
-        $id = $request->getParam('id');
-        $params = ['id'=>$id];
+        $employee = $request->getParam('employee');
+        $params = [];
         try {
-            $employee = $this->container->curl->post('http://serversl.local/api/employee?id=1', $params);
+            $employee = $this->container->curl->post('http://serversl.local/api/employee?id='.$id, $params);
         } catch (\RuntimeException $ex) {
-            $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
+            $this->container->logger->critical("[EmployeeController::getEdit}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
         }
 

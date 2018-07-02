@@ -79,12 +79,16 @@
 {% endif %}
 
 
-
     <div class="row content text-left">
-            <h1>Employee Details</h1>
-     <br><br>   
-        <div class="col-sm-11 text-left">
+            <h1><a href="{{ path_for('employees')}}"><img class="leftArrow" src="/assets/imgs/left_arrow.png" height=30 /></a>Employee Details</h1>
+      
 
+<div class="row con text-right menu-buttons">
+<button class="btn " id="back">Regresar a Lista</button>  
+<a href="{{ path_for('employeeEdit',{'id':employee.id}) }}"><button class="btn btn-info">Editar</button></a>  
+</div>
+
+        <div class="col-sm-11 text-left">
 
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Datos Personales</button>
@@ -167,7 +171,7 @@
             <div class="col-sm-11 col-md-offset-1 ">
                 <br>
 
-                <span class="btn btn-warning" id="back">Regresar</span>
+                <span class="btn btn-warning" >Regresar</span>
 
                 {% if readonly %}
                 <button class="btn btn-success pull-right" value="test">Edit</button>
@@ -229,7 +233,7 @@
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
             <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="employee[salary]" value="{{employee.salary|ucwords}}">
+                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="employee[salary]" value="{{employee.salary|number_format(2)}}">
             </div>
         </div>
         <div class="form-group row">

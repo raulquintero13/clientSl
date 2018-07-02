@@ -4,7 +4,7 @@
 $app->post('/api/employee', 'Api\Controllers\Employees\EmployeesController:getById');
 $app->get('/api/employee/{id}', 'Api\Controllers\Employees\EmployeesController:getById');
 
-$app->map(['GET','POST'],'/api/employees/save/{id}', 'Api\Controllers\Employees\EmployeesController:saveUserById')->setName('apiemployeeSave');
+$app->map(['GET','POST'],'/api/employees/save/{id}', 'Api\Controllers\Employees\EmployeesController:saveEmployeeById')->setName('apiemployeeSave');
 
 $app->get('/api/employees', 'Api\Controllers\Employees\EmployeesController:getAll');
 $app->post('/api/employees/create', 'Api\Controllers\Employees\EmployeesController:create');

@@ -45,7 +45,7 @@ class EmployeesController extends ControllerAbstract
     }
 
 
-    public function saveUserById($id){
+    public function saveEmployeeById($id){
 
       $request = $this->getRequest();
       $flash = $this->getService('flash');
@@ -56,6 +56,7 @@ class EmployeesController extends ControllerAbstract
       $employee = Employee::find($empData['employee']['id']);
 
       $human = $employee->human;
+
       $user = $employee->user;
       // $role = $employee->user->role;
 
@@ -63,7 +64,7 @@ class EmployeesController extends ControllerAbstract
       $employee->status = isset($empData['employee']['status'])?$empData['employee']['status']:$employee->status;
       $employee->sucursal = isset($empData['employee']['sucursal'])?$empData['employee']['sucursal']:$employee->sucursal;
       $employee->position_id = isset($empData['employee']['position_id'])?$empData['employee']['position']:$employee->position_id;
-      $employee->salary = isset($empData['employee']['salary'])?$empData['employee']['salary']:$employee->salary;
+      $employee->salary = isset($empData['employee']['salary'])?toInt($empData['employee']['salary']):$employee->salary;
       $employee->startdate = isset($empData['employee']['startdate'])?$empData['employee']['startdate']:$employee->startdata;
       $employee->user_active = isset($empData['employee']['user_active'])?$empData['employee']['user_active']:$employee->user_active;
 
@@ -84,7 +85,10 @@ class EmployeesController extends ControllerAbstract
 
       $employee->save();
       $human->save();
-      $user->save();
+
+      if($user instanceof User){
+        $user->save();
+      }
 
           
       $flash->addMessage('edited','El Registro de '.strtoupper( $human->first_name).' fue actualizado.');

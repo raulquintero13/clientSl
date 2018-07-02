@@ -22,6 +22,11 @@ if (!function_exists('d')) {
     }
 }
 
+function toInt($str)
+{
+    return preg_replace("/([^0-9\\.])/i", "", $str);
+}
+
 if (!function_exists('dd')) {
     /**
      * Dump the passed variables
