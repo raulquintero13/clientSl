@@ -31,4 +31,29 @@ class HomeController extends ControllerAbstract
     }
 
    
+    public function dashboardAction()
+    {
+        $environment = [
+            'environment' => env('APP_ENV'),
+            'client_name' => env('HTTP_CLIENT_NAME'),
+            'debug' => env('APP_DEBUG'),
+        ];
+
+        $flash = $this->getService('flash');
+        // $this->container->logger->info("HomeController",[1,23]);
+
+        // $env = $this->getRequest()->getServerParams();
+        // dump($env['APP_ENV']);die;
+        // $message = $flash->getFirstMessage('home');
+        $messages = $flash->getMessages();
+        // dump ($messages);die;
+        // dump($request->getAttributre('ip_address'));die;
+        return $this->render('Demo/dashboard.twig',[
+            'title' => $this->title,
+            'menuActive' => $this->menuActive,
+            'userLogged' => $this->container->cookies->get('user'),
+            'messages' => $messages,
+            'info' => $environment,
+        ]);
+    }
 }

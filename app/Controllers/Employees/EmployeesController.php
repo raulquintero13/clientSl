@@ -127,7 +127,7 @@ class EmployeesController extends ControllerAbstract
      return $this->render('Employees/employeeNew.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
-            'action' => '/application/employees/create',
+            'action' => '/api/employees/create',
             'data' => $params,
             'messages' => $messages,
             
@@ -137,6 +137,7 @@ class EmployeesController extends ControllerAbstract
     
     public function create(){
 
+        $url = 'http://clientsl.local/api/employees/create';
         $request = $this->getRequest();
         $response = $this->getResponse();
         $router = $this->getRouter();
@@ -150,7 +151,15 @@ class EmployeesController extends ControllerAbstract
             return $response->withRedirect($router->pathFor('employeeNew',['data' => $params]));
         }
 
-        // dd ($params);
+
+        try {
+            $resp = $this->container->curl->post($url, $params);
+            dd ([$url,$resp]);
+        } catch (\RuntimeException $ex) {
+            $this->container->logger->critical("[EmployeeController::getEdit}", [$ex->getMessage(), $ex->getCode()]);
+            // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
+        }
+
         return $response->withRedirect($router->pathFor('user',['id' => 1]));
     }
 

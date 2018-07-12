@@ -1,364 +1,346 @@
 {% extends 'Demo/Base.twig' %}
 
-{% block title %}{{title is defined ? title : 'not defined'}}{% endblock %}
+{% block title %}{{title is defined ? title : 'not defined'}}
+{% endblock %}
 
 {% block head %}
-{# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/> #}
+    {# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/> #}
 
-{# <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script> #}
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    {# <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script> #}
+    {# <script type="text/javascript" charset="utf-    8" src="https://code.jquery.com/jquery-1.12.4.js"></script> #}
 
-<style>
-/* Style the tab */
-.tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 20%;
-    height: 300px;
-}
+    <style>
+        /* Style the tab */
+        .tab {
+            float: left;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            width: 20%;
+            height: 300px;
+        }
 
-/* Style the buttons inside the tab */
-.tab button {
-    display: block;
-    background-color: inherit;
-    color: black;
-    padding: 22px 16px;
-    width: 100%;
-    border: none;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 17px;
-}
+        /* Style the buttons inside the tab */
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 17px;
+        }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
 
-/* Create an active/current "tab button" class */
-.tab button.active {
-    background-color: #ccc;
-}
+        /* Create an active/current "tab button" class */
+        .tab button.active {
+            background-color: #ccc;
+        }
 
-/* Style the tab content */
-.tabcontent {
-    margin-top: 10px;
-    float: left;
-    padding: 0px 12px;
-    {# border: 1px solid #ccc; #}
-    width: 80%;
-    border-left: none;
-    {# height: 300px; #}
-}
-</style>
+        /* Style the tab content */
+        .tabcontent {
+            margin-top: 10px;
+            float: left;
+            padding: 0 12px;
+            {# border: 1px solid #ccc; #}
+            width: 80%;
+            border-left: none;
+            {# height: 300px; #}
+        }
+    </style>
 {% endblock %}
 {% block container %}
 
+    <div class="container">
 
+        {% if messages.edited is defined %}
+            {% for message in messages.edited %}
+                <div id="alertdiv" class="alert  alert-success ">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
 
+        {% if message_error is defined %}
+            {% for message in message_error %}
+                <div class="alert  alert-success ">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-<div class="container">
+        <div class="row content text-left">
+            <h1>
+                <a href="{{ path_for('employees')}}"><img class="leftArrow" src="/assets/imgs/left_arrow.png" height="30"/></a>Employee Details</h1>
 
-{% if messages.edited is defined %}
-    {% for message in messages.edited %}
-<div id="alertdiv" class="alert  alert-success " >
-{{message}}
-    </div>
-    {% endfor %}
-{% endif %}
-
-{% if message_error is defined %}
-    {% for message in message_error %}
-<div class="alert  alert-success " >
-{{message}}
-    </div>
-    {% endfor %}
-{% endif %}
-
-
-    <div class="row content text-left">
-            <h1><a href="{{ path_for('employees')}}"><img class="leftArrow" src="/assets/imgs/left_arrow.png" height=30 /></a>Employee Details</h1>
-      
-
-<div class="row con text-right menu-buttons">
-{# <button class="btn btn-default" id="back"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>&nbsp;Regresar a Lista de Empleados</button>   #}
-<button class="btn btn-default" id="back"><span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;Imprimir</button>  
-<a href="{{ path_for('employeeEdit',{'id':employee.id}) }}"><button class="btn btn-default"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Editar Informacion</button></a>  
-</div>
-
-        <div class="col-sm-12 text-left">
-
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Datos Personales</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Datos Laborales</button>
-  <button class="tablinks" onclick="openCity(event, 'User')">Usuario</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Contrasena</button>
-</div>
-
-<div id="London" class="tabcontent">
-    {% if readonly %}
-        {% set path = path_for('employeeEdit',{'id':employee.id})  %}
-    {% else %}
-        {% set path =  path_for('apiemployeeSave',{'id':employee.id})  %}
-    {% endif %}
-    <form method="POST" action="{{ path }}">
-        <input type="hidden" id="id" name="employee[id]" value="{{ employee.id }}">
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">CURP</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="curp" name="human[curp]" value="{{employee.human.curp|upper}}">
+            <div class="row con text-right menu-buttons">
+                {# <button class="btn btn-default" id="back"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>&nbsp;Regresar a Lista de Empleados</button>   #}
+                <button class="btn btn-default" id="back">
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Lista de Empleados</button>
+                <button class="btn btn-default" id="back">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;Imprimir</button>
+                <a href="{{ path_for('employeeEdit',{'id':employee.id}) }}">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Editar Informacion</button>
+                </a>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Gender</label>
-            <div class="col-sm-9">
-                <select {{ readonly }} id="gender_id" name="human[gender_id]" class='form-control select2-me input-lg' style="width:250px;">
-                    {% for gender in employee.genders %}
-                        <option value="{{ gender.id }}"
-                        {% if employee.human.gender_id == gender.id %}
-                            selected
-                        {% endif %}
-                        >{{ gender.gender|ucwords }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">Name</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="first_name" name="human[first_name]" value="{{employee.human.first_name|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Middle Name</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="middle_name" name="human[middle_name]" value="{{employee.human.middle_name|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Last Name</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="last_name" name="human[last_name]" value="{{employee.human.last_name|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Email</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="email" name="human[email]" value="{{employee.human.email|lower}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Zip Code</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="zipcode" name="human[zipcode]" value="{{employee.human.zipcode}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Address</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="address" name="human[address]" value="{{employee.human.address}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Brithdate</label>
-            <div class="col-sm-9">
-                <input type="date" {{ readonly }} class="form-control input-lg" id="birthdate" name="human[birthdate]" value="{{employee.human.birthdate}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-11 col-md-offset-1 ">
-                <br>
 
-                <span class="btn btn-warning" >Regresar</span>
+            <div class="col-sm-12 text-left">
 
-                {% if readonly %}
-                <button class="btn btn-success pull-right" value="test">Edit</button>
-                {% else %}
-                <button class="btn btn-primary pull-right" value="test">save</button>
+                <div class="tab">
+                    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Datos Personales</button>
+                    <button class="tablinks" onclick="openCity(event, 'Paris')">Datos Laborales</button>
+                    <button class="tablinks" onclick="openCity(event, 'User')">Usuario</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Contrasena</button>
+                </div>
 
-                {% endif %}
-                {# Two <input class="btn pull-right" value="test2"> #}
-            </div>
-        </div>
-    {# </form> #}
+                <div id="London" class="tabcontent">
+                    {% if readonly %}
+                        {% set path = path_for('employeeEdit', {'id': employee.id}) %}
+                    {% else %}
+                        {% set path = path_for('apiemployeeSave', {'id': employee.id}) %}
+                    {% endif %}
+                    <form method="POST" action="{{ path }}">
+                        <input type="hidden" id="id" name="employee[id]" value="{{ employee.id }}">
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">CURP</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="curp" name="human[curp]" value="{{employee.human.curp|upper}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Gender</label>
+                            <div class="col-sm-9">
+                                <select {{ readonly }} id="gender_id" name="human[gender_id]" class='form-control select2-me input-lg' style="width:250px;">
+                                    {% for gender in employee.genders %}
+                                        <option value="{{ gender.id }}" {% if employee.human.gender_id == gender.id %} selected="selected" {% endif %}>{{ gender.gender|ucwords }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="first_name" name="human[first_name]" value="{{employee.human.first_name|ucwords}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Middle Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="middle_name" name="human[middle_name]" value="{{employee.human.middle_name|ucwords}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Last Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="last_name" name="human[last_name]" value="{{employee.human.last_name|ucwords}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="email" name="human[email]" value="{{employee.human.email|lower}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Zip Code</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="zipcode" name="human[zipcode]" value="{{employee.human.zipcode}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="address" name="human[address]" value="{{employee.human.address}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Brithdate</label>
+                            <div class="col-sm-9">
+                                <input type="date" {{ readonly }} class="form-control input-lg" id="birthdate" name="human[birthdate]" value="{{employee.human.birthdate}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-11 col-md-offset-1 ">
+                                <br>
 
-</div>
+                                <span class="btn btn-warning">Regresar</span>
 
-<div id="Paris" class="tabcontent">
+                                {% if readonly %}
+                                    <button class="btn btn-success pull-right" value="test">Edit</button>
+                                {% else %}
+                                    <button class="btn btn-primary pull-right" value="test">save</button>
 
-    {# {% if readonly %}
+                                {% endif %}
+                                {# Two <input class="btn pull-right" value="test2"> #}
+                            </div>
+                        </div>
+                        {# </form> #}
+
+                    {# </div> #}
+
+                    <div id="Paris" class="tabcontent">
+
+                        {# {% if readonly %}
         {% set path = path_for('userEdit',{'id':id})  %}
     {% else %}
         {% set path =  path_for('userSave',{'id':id})  %}
     {% endif %} #}
-    {# <form method="POST" action="{{ path }}"> #}
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">NSS</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="nss" name="employee[nss]" value="{{employee.nss|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">status</label>
-            <div class="col-sm-9">
-                <select {{ readonly }} id="status" name="employee[status]" class='form-control select2-me input-lg' style="width:250px;">
-                   
-                        {% if employee.status == 0 %}
-                           <option value="1">Activo</option>
-                           <option value="0" selected>Desactivado</option>
-                           {% else %}
-                           <option value="1" selected>Activo</option>
-                           <option value="0" >Desactivado</option>
+                        {# <form method="POST" action="{{ path }}"> #}
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">NSS</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="nss" name="employee[nss]" value="{{employee.nss|ucwords}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">status</label>
+                            <div class="col-sm-9">
+                                <select {{ readonly }} id="status" name="employee[status]" class='form-control select2-me input-lg' style="width:250px;">
+
+                                    {% if employee.status == 0 %}
+                                        <option value="1">Activo</option>
+                                        <option value="0" selected="selected">Desactivado</option>
+                                    {% else %}
+                                        <option value="1" selected="selected">Activo</option>
+                                        <option value="0">Desactivado</option>
+                                    {% endif %}
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Sucursal</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="sucursal" name="employee[sucursal]" value="{{employee.sucursal|ucwords}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="position_id" name="employee[position_id]" value="{{employee.position_id}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
+                            <div class="col-sm-9">
+                                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="employee[salary]" value="{{employee.salary|number_format(2)}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Start Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" {{ readonly }} class="form-control input-lg" id="startdate" name="employee[startdate]" value="{{ employee.startdate|date('y-m-d') }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-11 col-md-offset-1 ">
+                                <br>
+
+                                <span class="btn btn-warning" id="back">Regresar</span>
+
+                                {% if readonly %}
+                                    <button class="btn btn-success pull-right" value="test">Edit</button>
+                                {% else %}
+                                    <button class="btn btn-primary pull-right" value="test">save</button>
+
+                                {% endif %}
+                                {# Two <input class="btn pull-right" value="test2"> #}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="User" class="tabcontent">
+
+                        <div class="form-group row">
+                            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">User Status</label>
+                            <div class="col-sm-9">
+                                <select {{ readonly }} id="user_active" name="employee[user_active]" class='form-control select2-me input-lg' style="width:250px;">
+
+                                    {% if employee.user_active == 0 %}
+                                        <option value="1">Activo</option>
+                                        <option value="0" selected="selected">Desactivado</option>
+                                    {% else %}
+                                        <option value="1" selected="selected">Activo</option>
+                                        <option value="0">Desactivado</option>
+                                    {% endif %}
+
+                                </select>
+                            </div>
+                        </div>
+
+                        {% if employee.user_active == 1 %}
+                            <div class="form-group row">
+                                <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Role</label>
+                                <div class="col-sm-9">
+                                    <select {{ readonly }} id="role_id" name="user[role_id]" class='form-control select2-me input-lg' style="width:250px;">
+                                        {% for role in employee.roles %}
+                                            <option value="{{ role.id }}" {% if employee.user.role_id == role.id %} selected="selected" {% endif %}>{{ role.role|ucwords }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-11 col-md-offset-1 ">
+                                    <br>
+
+                                    <span class="btn btn-warning" id="back">Regresar</span>
+
+                                    {% if readonly %}
+                                        <button class="btn btn-success pull-right" value="test">Edit</button>
+                                    {% else %}
+                                        <button class="btn btn-primary pull-right" value="test">save</button>
+
+                                    {% endif %}
+                                    {# Two <input class="btn pull-right" value="test2"> #}
+                                </div>
+                            </div>
                         {% endif %}
-                        
-                </select>
-            </div>
-        </div>
-        
-        
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Sucursal</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="sucursal" name="employee[sucursal]" value="{{employee.sucursal|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Position</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="position_id" name="employee[position_id]" value="{{employee.position_id|ucwords}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Salary</label>
-            <div class="col-sm-9">
-                <input type="text" {{ readonly }} class="form-control input-lg" id="salary" name="employee[salary]" value="{{employee.salary|number_format(2)}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2  col-md-offset-1  col-form-label">Start Date</label>
-            <div class="col-sm-9">
-                <input type="date" {{ readonly }} class="form-control input-lg" id="startdate" name="employee[startdate]" value="{{employee.startdate|date("Y-m-d")}}">
-            </div>
-        </div>
-        
-        <div class="form-group row">
-            <div class="col-sm-11 col-md-offset-1 ">
-                <br>
 
-                <span class="btn btn-warning" id="back">Regresar</span>
-
-                {% if readonly %}
-                <button class="btn btn-success pull-right" value="test">Edit</button>
-                {% else %}
-                <button class="btn btn-primary pull-right" value="test">save</button>
-
-                {% endif %}
-                {# Two <input class="btn pull-right" value="test2"> #}
-            </div>
-        </div>
-
-</div>
-
-
-
-<div id="User" class="tabcontent">
-
-
-         <div class="form-group row">
-            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">User Status</label>
-            <div class="col-sm-9">
-                <select {{ readonly }} id="user_active" name="employee[user_active]" class='form-control select2-me input-lg' style="width:250px;">
-                   
-                        {% if employee.user_active == 0 %}
-                           <option value="1">Activo</option>
-                           <option value="0" selected>Desactivado</option>
-                           {% else %}
-                           <option value="1" selected>Activo</option>
-                           <option value="0" >Desactivado</option>
-                        {% endif %}
-                        
-                </select>
-            </div>
-        </div>
-
-{% if employee.user_active == 1 %}
-        <div class="form-group row">
-            <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Role</label>
-            <div class="col-sm-9">
-                <select {{ readonly }} id="role_id" name="user[role_id]" class='form-control select2-me input-lg' style="width:250px;">
-                    {% for role in employee.roles %}
-                        <option value="{{ role.id }}"
-                        {% if employee.user.role_id == role.id %}
-                            selected
-                        {% endif %}
-                        >{{ role.role|ucwords }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-        
-        
-        
-        
-        
-        <div class="form-group row">
-            <div class="col-sm-11 col-md-offset-1 ">
-                <br>
-
-                <span class="btn btn-warning" id="back">Regresar</span>
-
-                {% if readonly %}
-                <button class="btn btn-success pull-right" value="test">Edit</button>
-                {% else %}
-                <button class="btn btn-primary pull-right" value="test">save</button>
-
-                {% endif %}
-                {# Two <input class="btn pull-right" value="test2"> #}
-            </div>
-        </div>
-        {% endif %}
-    </form>
-
-</div>
-
-
-    <div id="Tokyo" class="tabcontent">
-
-
-        {# <h2>Vertical (basic) form</h2> #}
-        <form action="/action_page.php">
-        
-            <div class="form-group row">
-                <label for="oldpwd" class="col-sm-2  col-md-offset-1  col-form-label">Old Password:</label>
-                <div class="col-sm-9">
-                    <input type="password" class="form-control input-lg" id="oldpwd" placeholder="Enter old password" name="oldpwd">
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="pwd" class="col-sm-2  col-md-offset-1  col-form-label">Password:</label>
-                <div class="col-sm-9">
-                    <input type="password" class="form-control input-lg" id="pwd" placeholder="Enter password" name="pwd">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="pwd" class="col-sm-2  col-md-offset-1  col-form-label">Retype Password:</label>
-                <div class="col-sm-9">
-                    <input type="password" class="form-control input-lg" id="repwd" placeholder="Enter password" name="repwd">
-                </div>
-            </div>
-            <div class="form-group row pull-right">
-            {# <div class="col-sm-11 col-md-offset-1 "> #}
-                <br>
-            <button type="submit" class="btn btn-default">Cambiar</button>
-            {# </div> #}
-        </form>
+                    </form>
 
+                <div id="Tokyo" class="tabcontent">
 
+                    {# <h2>Vertical (basic) form</h2> #}
+                    <form action="/action_page.php">
 
-        {# <div class="container bootstrap snippet">
+                        <div class="form-group row">
+                            <label for="oldpwd" class="col-sm-2  col-md-offset-1  col-form-label">Old Password:</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control input-lg" id="oldpwd" placeholder="Enter old password" name="oldpwd">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="pwd" class="col-sm-2  col-md-offset-1  col-form-label">Password:</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control input-lg" id="pwd" placeholder="Enter password" name="pwd">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="pwd" class="col-sm-2  col-md-offset-1  col-form-label">Retype Password:</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control input-lg" id="repwd" placeholder="Enter password" name="repwd">
+                            </div>
+                        </div>
+                        <div class="form-group row pull-right">
+                            {# <div class="col-sm-11 col-md-offset-1 "> #}
+                            <br>
+                            <button type="submit" class="btn btn-default">Cambiar</button>
+                            {# </div> #}
+
+                        {# <div class="container bootstrap snippet">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-1">
                     <div class="panel panel-info">
@@ -403,52 +385,46 @@
             </div>
         </div> #}
 
-    
+                    </div>
 
-    </div>
+                </div>
+            </div>
 
-</div>
-</div>
+        {% endblock %}
+        {% block scripts %}
 
-{% endblock %}
-{% block scripts %}
+            <script>
+                document.getElementById("back").addEventListener("click", regresar);
 
-<script>
-document.getElementById("back").addEventListener("click", regresar);
+                function regresar() {
+                    window.location.href = 'http://clientsl.local/application/employees';
+                }
+            </script>
 
-function regresar(){
-     window.location.href='http://clientsl.local/application/employees';
-}
+            <script>
+                function openCity(evt, cityName) {
+                    var i,
+                        tabcontent,
+                        tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
 
-</script>
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
 
+                setTimeout(function () { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
 
+                    $("#alertdiv").remove();
 
-
-<script>
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-
- setTimeout(function() { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
-
-
-      $("#alertdiv").remove();
-
-    }, 4000);
-
-</script>
-    {% endblock %}
+                }, 4000);
+            </script>
+        {% endblock %}

@@ -1,6 +1,8 @@
 <?php
 
 $app->get('/', 'App\Controllers\Base\HomeController:homeAction')->setName('home');
+$app->get('/dashboard', 'App\Controllers\Base\HomeController:dashboardAction')->setName('dashboard');
+
 $app->get('/pos', 'App\Controllers\Modules\PosController:posAction');
 
 // $app->map(['GET','POST'],'/users', 'App\Actions\Demo\UsersAction:getAllUsers')->setName('users');

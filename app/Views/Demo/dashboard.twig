@@ -1,0 +1,41 @@
+{% extends 'Demo/Base.twig' %}
+
+{# {% block navigation %}
+   
+{% endblock %} #}
+
+
+
+
+{% block title %}{{title is defined ? title : 'not defined'}}{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block container %}
+
+
+<div class="container text-left ">
+{% if messages is defined %}
+    {% for message in messages %}
+<div class="alert  alert-success " >
+{{message}}
+
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+<pre>
+Environment: {{ info.environment }}
+Software Name: {{ info.client_name }}
+Debug: {{ info.debug }}
+</pre>
+
+
+
+
+{% endblock %}

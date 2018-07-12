@@ -5,10 +5,27 @@
 {% endif %}
 
 <li class="active">
-<a href="{{ path_for('home')}}">Inicio</a>
+<a href="{{ path_for('dashboard')}}">Dashboard</a>
 </li>
 
 
+
+
+<li class="dropdown">
+    <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle" href="/page.html">
+        Proveedores
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+
+        <li>
+            <a href="/application/clients">Proveedores</a>
+        </li>
+        <li>
+            <a href="/application/employees">Productos</a>
+        </li>
+
+    </ul>
 
 
 <li class="dropdown">
@@ -23,6 +40,22 @@
         </li>
         <li>
             <a href="/application/employees">Employees</a>
+        </li>
+
+    </ul>
+
+<li class="dropdown">
+    <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle" href="/page.html">
+        Human Resources
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+
+        <li>
+            <a href="/application/clients">Employees</a>
+        </li>
+        <li>
+            <a href="/application/employees">Services</a>
         </li>
 
     </ul>

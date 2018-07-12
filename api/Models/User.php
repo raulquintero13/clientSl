@@ -9,7 +9,7 @@ class User extends \Illuminate\Database\Eloquent\Model {
     public function employee(){
         return $this->belongsTo(Employee::class);
     }
-    public function role(){
-        return $this->belongsTo(Role::class);
-    }
+    // public function role(){
+    //     return $this->belongsTo(Role::class);
+    // }
 }
