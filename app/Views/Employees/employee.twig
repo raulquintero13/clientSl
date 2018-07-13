@@ -101,7 +101,6 @@
                     <button class="tablinks" onclick="openCity(event, 'Tokyo')">Contrasena</button>
                 </div>
 
-                <div id="London" class="tabcontent">
                     {% if readonly %}
                         {% set path = path_for('employeeEdit', {'id': employee.id}) %}
                     {% else %}
@@ -109,6 +108,7 @@
                     {% endif %}
                     <form method="POST" action="{{ path }}">
                         <input type="hidden" id="id" name="employee[id]" value="{{ employee.id }}">
+                <div id="London" class="tabcontent">
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2  col-md-offset-1 col-form-label">CURP</label>
                             <div class="col-sm-9">
@@ -184,7 +184,7 @@
                         </div>
                         {# </form> #}
 
-                    {# </div> #}
+                </div>
 
                     <div id="Paris" class="tabcontent">
 

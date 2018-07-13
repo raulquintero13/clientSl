@@ -1,0 +1,174 @@
+{% extends 'Demo/Base.twig' %}
+
+{% block title %}{{title is defined ? title : 'not defined'}}
+{% endblock %}
+
+{% block head %}
+    {# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/> #}
+
+    {# <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script> #}
+    {# <script type="text/javascript" charset="utf-    8" src="https://code.jquery.com/jquery-1.12.4.js"></script> #}
+
+    <style>
+        /* Style the tab */
+        .tab {
+            float: left;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            width: 20%;
+            height: 300px;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current "tab button" class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            margin-top: 10px;
+            float: left;
+            padding: 0 12px;
+            {# border: 1px solid #ccc; #}
+            width: 80%;
+            border-left: none;
+            {# height: 300px; #}
+        }
+    </style>
+{% endblock %}
+{% block container %}
+
+    <div class="container">
+
+        {% if messages.edited is defined %}
+            {% for message in messages.edited %}
+                <div id="alertdiv" class="alert  alert-success ">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if message_error is defined %}
+            {% for message in message_error %}
+                <div class="alert  alert-success ">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row content text-left">
+            <h1>
+                <a href="{{ path_for('employees')}}"><img class="leftArrow" src="/assets/imgs/left_arrow.png" height="30"/></a>Employee Details</h1>
+
+            <div class="row con text-right menu-buttons">
+                {# <button class="btn btn-default" id="back"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>&nbsp;Regresar a Lista de Empleados</button>   #}
+                <button class="btn btn-default" id="back">
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Lista de Empleados</button>
+                <button class="btn btn-default" id="back">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;Imprimir</button>
+                <a href="{{ path_for('employeeEdit',{'id':employee.id}) }}">
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Editar Informacion</button>
+                </a>
+            </div>
+
+            <div class="col-sm-12 text-left">
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Datos Personales</button>
+                    <button class="tablinks" onclick="openCity(event, 'Paris')">Datos Laborales</button>
+                    <button class="tablinks" onclick="openCity(event, 'User')">Usuario</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Contrasena</button>
+                </div>
+                    {% if readonly %}
+                        {% set path = path_for('employeeEdit', {'id': employee.id}) %}
+                    {% else %}
+                        {% set path = path_for('apiemployeeSave', {'id': employee.id}) %}
+                    {% endif %}
+                    <form method="POST" action="{{ path }}">
+
+                    <div id="London" class="tabcontent">
+                            london
+                    </div>
+
+
+                    <div id="Paris" class="tabcontent">
+
+                     hola
+
+                
+
+                    </div>
+
+                    <div id="User" class="tabcontent">
+
+                       user
+
+                    </div>
+                    </form>
+
+                <div id="Tokyo" class="tabcontent">
+
+                    tokyo
+
+                </div>
+            </div>
+
+        {% endblock %}
+        {% block scripts %}
+
+            <script>
+                document.getElementById("back").addEventListener("click", regresar);
+
+                function regresar() {
+                    window.location.href = 'http://clientsl.local/application/employees';
+                }
+            </script>
+
+            <script>
+                function openCity(evt, cityName) {
+                    var i,
+                        tabcontent,
+                        tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+
+                setTimeout(function () { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+                    $("#alertdiv").remove();
+
+                }, 4000);
+            </script>
+        {% endblock %}

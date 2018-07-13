@@ -56,7 +56,7 @@ class EmployeesController extends ControllerAbstract
         }else{
             // var_dump($request->getParam('edit'));die;
             return $this->render('Employees/employee.twig', [
-                'title' => 'Employee: '.$user['firstname'].' '.$user['lastname'],
+                'title' => 'Employee: '.$employee['human']['first_name'].' '.$employee['human']['middle_name'],
                 'menuActive' => $this->menuActive,
                 'userLogged' => $this->container->cookies->get('user'),
                 'id' => $id,
