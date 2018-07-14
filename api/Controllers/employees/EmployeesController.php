@@ -43,7 +43,7 @@ class EmployeesController extends ControllerAbstract
 
 
     $id = $request->getParam('id');
-    $this->container->logger->info("api-auth:agent", [$id, Employee::find(1)]);
+    $this->container->logger->info("api-employeeController-getById", [$id, Employee::find(1)]);
 
     return $response->withJson($employee, 200);
   }

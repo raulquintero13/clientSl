@@ -34,7 +34,7 @@ class EmployeesController extends ControllerAbstract
             // $employee = $this->container->curl->post('http://serversl.local/api/user', $params);
             $employee = $this->container->curl->post('http://serversl.local/api/employee', $params);
         } catch (\RuntimeException $ex) {
-            $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
+            $this->container->logger->critical("[EmployeeController::getById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
         }
         // dump($employee);
@@ -127,7 +127,7 @@ class EmployeesController extends ControllerAbstract
      return $this->render('Employees/employeeNew.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
-            'action' => '/api/employees/create',
+            'action' => '/application/employees/create',
             'data' => $params,
             'messages' => $messages,
             
@@ -199,9 +199,6 @@ class EmployeesController extends ControllerAbstract
         ]);
     }
 
-
-
-
     public function save($id){
 
         $request = $this->getRequest();
@@ -217,8 +214,6 @@ class EmployeesController extends ControllerAbstract
         return $response->withRedirect($router->pathFor('user',['id' => $id]));
         // $this->router->pathFor('author', ['author_id' => $author->id])
     }
-
-
 
     /**
      * Index Action

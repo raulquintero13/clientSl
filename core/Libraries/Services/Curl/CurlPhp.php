@@ -44,7 +44,7 @@ class CurlPhp extends ServiceAbstract
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $fields_string);
         $response = curl_exec($this->ch);
-        // $logger->info("CurlPhp::post", [$response]);
+        $logger->info("CurlPhp::response", [$response]);
         
         $error = curl_error($this->ch);
         $errno = curl_errno($this->ch);
@@ -52,6 +52,8 @@ class CurlPhp extends ServiceAbstract
             curl_close($this->ch);
         }
         if (0 !== $errno) {
+        $logger->info("CurlPhp::error", [$response]);
+
             throw new \RuntimeException($error, $errno);
         }
         return json_decode($response,1);
