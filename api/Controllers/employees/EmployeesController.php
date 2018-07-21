@@ -118,7 +118,7 @@ class EmployeesController extends ControllerAbstract
     $this->container->logger->info("createEmployee", [$data]);
 
     foreach($data as $key=>$value){
-    $this->container->logger->info("createEmployee", [$key=>$value]);
+    $this->container->logger->info("createEmployee[foreach]", [$key=>$value]);
     }
     
     $human = $employee->human;
@@ -136,7 +136,7 @@ class EmployeesController extends ControllerAbstract
     $human->email = $data['human']['email'];
     $human->zipcode = $data['human']['zipcode'];
     $human->address = $data['human']['address'];
-    $human->birthdate = $data['human']['birthdate'];
+    $human->birthdate = (isset($data['human']['birthdate']))?$data['human']['birthdate'] : date("Y-m-d H:i:s");
     $human->address_id = $data['human']['address_id'];
     $human->gender_id = $data['human']['gender_id'];
 
@@ -152,10 +152,19 @@ class EmployeesController extends ControllerAbstract
     $user->rights = $data['user']['rights'];
     $user->role_id = $data['user']['role_id'];
     
+    $this->container->logger->info("createEmployee", ['startdate'=>$employee->startdate]);
     $human->save();
     $human->employee()->save($employee);
     // echo('hola');die;
     // $human->employee()->user()->save($user);
+
+
+    $employee_id = $employee->id;
+    $user->employee_id = $employee->id;
+    // $data['user'] ['employee_id'] = $employee_id;
+    $user->save($data['user']);
+    // dd($user);
+   
     
     $resp ['typeCode'] = 1;
     $resp ['message'] = 'Creado Satisfactoriamente';

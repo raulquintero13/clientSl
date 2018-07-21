@@ -30,11 +30,27 @@
     </a>
     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
 
-        <li>
-            <a href="/application/clients">Clients</a>
+        <li class="dropdown-submenu">
+            <a tabindex="-1" href="#">Clients</a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="/application/clients">Show Clients</a>
+                </li>
+                <li>
+                    <a href="/application/clients/new">Create New</a>
+                </li>
+            </ul>
         </li>
-        <li>
-            <a href="/application/employees">Employees</a>
+        <li class="dropdown-submenu">
+            <a tabindex="-1" href="#">Employees</a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="/application/employees">Show Employees</a>
+                </li>
+                <li>
+                    <a href="/application/employees/new">Create New</a>
+                </li>
+            </ul>
         </li>
 
     </ul>
@@ -51,6 +67,9 @@
         </li>
         <li>
             <a href="/application/employees">Services</a>
+        </li>
+        <li>
+            <a href="/application/employees">Recruitment</a>
         </li>
 
     </ul>

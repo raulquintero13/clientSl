@@ -55,6 +55,7 @@ class EmployeesController extends ControllerAbstract
             return $response->withRedirect($router->pathFor('users'));
         }else{
             // var_dump($request->getParam('edit'));die;
+            $employee['startdate'] = str_replace(" ","T",$employee['startdate']);
             return $this->render('Employees/employee.twig', [
                 'title' => 'Employee: '.$employee['human']['first_name'].' '.$employee['human']['middle_name'],
                 'menuActive' => $this->menuActive,
@@ -187,6 +188,7 @@ class EmployeesController extends ControllerAbstract
         if ($readonly){
             $message_error [] = 'No tienes permiso par editar este registro.';
         }
+        $employee['startdate'] = str_replace(" ","T",$employee['startdate']);
 
         return $this->render('Employees/employee.twig', [
             'title' => 'Employee: '.$user['firstname'].' '.$user['lastname'],
