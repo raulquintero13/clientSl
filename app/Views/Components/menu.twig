@@ -1,15 +1,10 @@
-
-
-{% if menuActive is not  defined %}
-    {% set menuActive='' %}
+{% if menuActive is not defined %}
+    {% set menuActive = '' %}
 {% endif %}
 
 <li class="active">
-<a href="{{ path_for('dashboard')}}">Dashboard</a>
+    <a href="{{ path_for('dashboard')}}">Dashboard</a>
 </li>
-
-
-
 
 <li class="dropdown">
     <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle" href="/page.html">
@@ -27,7 +22,7 @@
 
     </ul>
 
-
+</li>
 <li class="dropdown">
     <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle" href="/page.html">
         Administration
@@ -43,7 +38,7 @@
         </li>
 
     </ul>
-
+</li>
 <li class="dropdown">
     <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle" href="/page.html">
         Human Resources
@@ -60,7 +55,7 @@
 
     </ul>
 
-
+</li>
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modules
         <span class="caret"></span>
@@ -71,7 +66,6 @@
         </li>
     </ul>
 </li>
-
 
 <li class="dropdown">
     <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle" href="/page.html">
@@ -86,51 +80,49 @@
             <a href="/eloquent">Eloquent</a>
         </li>
 
-        
         <li class="divider"></li>
-<li class="dropdown-submenu">
-    <a tabindex="-1" href="#">Utilities</a>
-    <ul class="dropdown-menu">
-        <li>
-            <a tabindex="-1" href="/system/utilities/environment">Environment variables</a>
-        </li>
-        
-        <li>
-            <a href="#">Activos</a>
-        </li>
-        <li>
-            <a href="#">Inactivos</a>
-        </li>
         <li class="dropdown-submenu">
             <a tabindex="-1" href="#">Utilities</a>
             <ul class="dropdown-menu">
                 <li>
-                    <a tabindex="-1" href="/system/utilities/environment">Environment</a>
+                    <a tabindex="-1" href="/system/utilities/environment">Environment variables</a>
+                </li>
+
+                <li>
+                    <a href="#">Activos</a>
+                </li>
+                <li>
+                    <a href="#">Inactivos</a>
                 </li>
                 <li class="dropdown-submenu">
-                    <a href="#">Even More..</a>
+                    <a tabindex="-1" href="#">Utilities</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">3rd level</a>
+                            <a tabindex="-1" href="/system/utilities/environment">Environment</a>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#">Even More..</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">3rd level</a>
+                                </li>
+                                <li>
+                                    <a href="#">3rd level</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Second level</a>
                         </li>
                         <li>
                             <a href="#">3rd level</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#">Second level</a>
-                </li>
-                <li>
-                    <a href="#">3rd level</a>
-                </li>
             </ul>
         </li>
-    </ul>
-</li>
-       <li>
+        <li>
             <a href="/pos">Menu</a>
         </li>
     </ul>
 </li>
-
