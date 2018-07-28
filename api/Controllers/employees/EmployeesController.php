@@ -280,7 +280,7 @@ class EmployeesController extends ControllerAbstract
         $value['middle_name'],
         $value['last_name'],
         $value['startdate'],
-        $value['status']
+        ($value['status']) ? 'activo' : 'inactivo'
       ];
 
     }

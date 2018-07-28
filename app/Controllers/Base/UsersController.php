@@ -45,7 +45,7 @@ class UsersController extends ControllerAbstract
             return $response->withRedirect($router->pathFor('users'));
         }else{
             // var_dump($request->getParam('edit'));die;
-            return $this->render('Demo/user.twig', [
+            return $this->render('Users/user.twig', [
                 'title' => 'User: '.$user['firstname'].' '.$user['lastname'],
                 'menuActive' => $this->menuActive,
                 'userLogged' => $this->container->cookies->get('user'),
@@ -114,7 +114,7 @@ class UsersController extends ControllerAbstract
 
     
 
-        return $this->render('Base/userNew.twig', [
+        return $this->render('Users/userNew.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             
@@ -139,7 +139,7 @@ class UsersController extends ControllerAbstract
             $message_error [] = 'No tienes permiso par editar este registro.';
         }
 
-        return $this->render('Demo/user.twig', [
+        return $this->render('Users/user.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
@@ -185,7 +185,7 @@ class UsersController extends ControllerAbstract
         $flash = $this->getService('flash');
 
         $messages = $flash->getMessages();
-        return $this->render('Demo/users.twig', [
+        return $this->render('Users/users.twig', [
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
