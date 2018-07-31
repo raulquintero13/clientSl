@@ -210,10 +210,17 @@ class EmployeesController extends ControllerAbstract
 
         $employee = $request->getParams();
 
-            dump($employee);die;
+            // dump($employee);die;
+
+            try {
+                $employee = $this->container->curl->post('http://serversl.local/api/employees/save/'.$id, $_POST);
+            } catch (\RuntimeException $ex) {
+                $this->container->logger->critical("[EmployeeController::getEdit}", [$ex->getMessage(), $ex->getCode()]);
+                // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
+            }
         
         $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
-        return $response->withRedirect($router->pathFor('user',['id' => $id]));
+        return $response->withRedirect($router->pathFor('employee',['id' => $id]));
         // $this->router->pathFor('author', ['author_id' => $author->id])
     }
 

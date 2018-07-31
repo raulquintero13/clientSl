@@ -108,7 +108,7 @@
                     {% if readonly %}
                         {% set path = path_for('employeeEdit', {'id': employee.id}) %}
                     {% else %}
-                        {% set path = path_for('apiemployeeSave', {'id': employee.id}) %}
+                        {% set path = path_for('employeeSave', {'id': employee.id}) %}
                     {% endif %}
                     <form method="POST" action="{{ path }}">
                         <input type="hidden" id="id" name="employee[id]" value="{{ employee.id }}">
