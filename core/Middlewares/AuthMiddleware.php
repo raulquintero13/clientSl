@@ -20,38 +20,38 @@ class AuthMiddleware extends MiddlewareAbstract
     {
         switch ($request->getUri()->getPath()) {
             case '/none':
-                $public = true;
+                $isPublic = true;
                 break;
             case '/login':
-                $public = true;
+                $isPublic = true;
                 break;
             case '/api/employee':
-                $public = true;
+                $isPublic = true;
                 break;
             case '/api/user':
-                $public = true;
+                $isPublic = true;
                 break;
             // case 'api/employees/save/1':
-            //     $public = true;
+            //     $isPublic = true;
             //     break;
             case '/api/users':
-                $public = true;
+                $isPublic = true;
                 break;
             case '/auth':
-                $public = true;
+                $isPublic = true;
                 break;
             case '/api/employees/create':
-                $public = true;
+                $isPublic = true;
                 break;
             case '/api/auth':
-                $public = true;
+                $isPublic = true;
                 break;
             default:
-                $public = false;
+                $isPublic = false;
                 break;
         }
         // $response->getBody()->write('-- BEFORE --<br><br>');
-        if ($this->_isLogged() || $public){
+        if ($this->_isLogged() || $isPublic){
             $response = $next($request, $response);
             
         } else

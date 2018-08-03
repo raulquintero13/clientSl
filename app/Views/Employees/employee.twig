@@ -78,31 +78,31 @@
 
         <div class="row content text-left">
             <h1>
-                <a href="{{ path_for('employees')}}"><img class="leftArrow" src="/assets/imgs/left_arrow.png" height="30"/></a>Employee Details</h1>
+                <a href="{{ path_for('employees')}}"><img class="leftArrow" src="/assets/imgs/left_arrow.png" height="30"/></a>Associated Details</h1>
 
             <div class="row con text-right menu-buttons">
                 {# <button class="btn btn-default" id="back"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>&nbsp;Regresar a Lista de Empleados</button>   #}
                 <button class="btn btn-default" id="back">
-                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Lista de Empleados</button>
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;List of Assocciates</button>
                 <button class="btn btn-default" id="print">
-                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;Imprimir</button>
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;Print</button>
                 <a href="{{ path_for('employeeEdit',{'id':employee.id}) }}">
                     <button class="btn btn-default" id='edit'>
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Editar Informacion</button>
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Edit</button>
                 </a>
                 <a href="{{ path_for('employeeEdit',{'id':employee.id}) }}">
-                    <button class="btn btn-danger" id='edit'>
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Grabar Cambios</button>
+                    <button class="btn btn-danger" id='save' onclick='document.getElementById("formData").submit();'>
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Save Changes</button>
                 </a>
             </div>
 
             <div class="col-sm-12 text-left">
 
                 <div class="tab">
-                    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Datos Personales</button>
-                    <button class="tablinks" onclick="openCity(event, 'Paris')">Datos Laborales</button>
-                    <button class="tablinks" onclick="openCity(event, 'User')">Usuario</button>
-                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Contrasena</button>
+                    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Personal Data</button>
+                    <button class="tablinks" onclick="openCity(event, 'Paris')">Labor Data</button>
+                    <button class="tablinks" onclick="openCity(event, 'User')">User Data</button>
+                    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Security</button>
                 </div>
 
                     {% if readonly %}
@@ -110,7 +110,7 @@
                     {% else %}
                         {% set path = path_for('employeeSave', {'id': employee.id}) %}
                     {% endif %}
-                    <form method="POST" action="{{ path }}">
+                    <form method="POST" action="{{ path }}" id="formData">
                         <input type="hidden" id="id" name="employee[id]" value="{{ employee.id }}">
                 <div id="London" class="tabcontent">
                         <div class="form-group row">
