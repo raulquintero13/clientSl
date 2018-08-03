@@ -3,6 +3,10 @@
 use Core\Kernel\ControllerAbstract;
 // use Core\Libraries\Database\SimplePDO;
 
+use Api\Controllers \{
+    Human, User, Employee, Gender, Role
+  };
+
 class AuthController extends ControllerAbstract
 {
 
@@ -18,13 +22,16 @@ class AuthController extends ControllerAbstract
         $response = $this->getResponse();
         $request = $this->getRequest();
 
-
+        
         $params = $request->getParams();
+        // $params = $this->EncryptorService->edecode($request->getParams());
         // $params = $_POST;
         
-        // var_dump($result);
         $this->container->logger->info("api-auth:decrypted", [$params]);
         
+
+        // get info from de database to validate this user
+
         
         $result = [
             'user' => $params['email'],
