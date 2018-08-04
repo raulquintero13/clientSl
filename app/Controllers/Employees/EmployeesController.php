@@ -56,7 +56,8 @@ class EmployeesController extends ControllerAbstract
         }else{
             // var_dump($request->getParam('edit'));die;
             $employee['startdate'] = str_replace(" ","T",$employee['startdate']);
-            return $this->render('Employees/employee.twig', [
+
+            $resp = [
                 'title' => 'Employee: '.$employee['human']['first_name'].' '.$employee['human']['middle_name'],
                 'menuActive' => $this->menuActive,
                 'userLogged' => $this->container->cookies->get('user'),
@@ -64,7 +65,10 @@ class EmployeesController extends ControllerAbstract
                 'employee' => $employee,
                 'readonly' => 'disabled',
                 'messages' => $messages 
-            ]);
+            ];
+
+            debugData($resp);
+            return $this->render('Employees/employee.twig', $resp);
         }
     }
 

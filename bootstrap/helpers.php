@@ -2,7 +2,26 @@
 
 use Core\Kernel\VarDumper;
 
-
+if (!function_exists('d')) {
+    /**
+     * Dump the passed variables
+     *
+     * @param  array
+     * @return void
+     */
+    function debugData($data)
+    {
+        if (getenv("APP_ENV") == 'dev') {
+            echo "<div style='text-align: left;'>Debug Data<pre>";
+            foreach ($data as $key => $value) {
+                echo
+                    var_export([$key=>$value]);
+                echo "<br>";
+            }
+            echo "</pre></div>";
+        }
+    }
+}
 
 if (!function_exists('d')) {
     /**
