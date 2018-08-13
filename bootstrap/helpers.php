@@ -12,9 +12,9 @@ if (!function_exists('d')) {
     function debugData($data)
     {
         if (getenv("APP_ENV") == 'dev') {
+            echo "<br><br><br>";
             echo "<div style='text-align: left;'>Debug Data<pre>";
             foreach ($data as $key => $value) {
-                echo
                     var_export([$key=>$value]);
                 echo "<br>";
             }
