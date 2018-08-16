@@ -18,6 +18,7 @@ class AuthMiddleware extends MiddlewareAbstract
      */
     public function __invoke(Request $request, Response $response, $next)
     {
+        dd([$request->getUri()->getPath(),__FILE__]);
         switch ($request->getUri()->getPath()) {
             case '/none':
                 $isPublic = true;
@@ -38,6 +39,9 @@ class AuthMiddleware extends MiddlewareAbstract
                 $isPublic = true;
                 break;
             case '/auth':
+                $isPublic = true;
+                break;
+            case '/api/employees/save':
                 $isPublic = true;
                 break;
             case '/api/employees/create':

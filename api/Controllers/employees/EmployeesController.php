@@ -205,8 +205,13 @@ class EmployeesController extends ControllerAbstract
     $take = $request->getParam('length');
 
     $column = $fields[$order['column']];
+    
+    // $cuantos = Employee::select(DB::raw("COUNT(humans.first_name)"))->join('humans', 'humans.id', '=', 'employees.human_id')->
+    // // select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
+    // orderBy($column, $order['dir'])->take($take)->skip($skip)->get(['employees.id', 'humans.first_name', 'humans.middle_name', 'humans.last_name', 'employees.startdate', 'employees.status']);
+    
+    // var_export(Employee::get()->count());die;
       // var_dump($search);die;
-
       // if ($search['value']){
       //   die($search);
       // }
@@ -224,7 +229,7 @@ class EmployeesController extends ControllerAbstract
     $employees = [
       "draw" => $_GET['draw'],
       "recordsTotal" => Employee::count(),
-      "recordsFiltered" => count($this->_arrayToLinks($employeesObj->toArray())),
+      "recordsFiltered" => Employee::get()->count(),
       'data' => $this->_arrayToLinks($employeesObj->toArray())
     ];
 
