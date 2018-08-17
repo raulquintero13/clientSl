@@ -36,6 +36,7 @@ class HomeController extends ControllerAbstract
         $environment = [
             'environment' => env('APP_ENV'),
             'client_name' => env('HTTP_CLIENT_NAME'),
+            'app_role' => env('APP_ROLE'),
             'debug' => env('APP_DEBUG'),
         ];
 

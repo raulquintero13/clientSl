@@ -30,9 +30,11 @@ class EmployeesController extends ControllerAbstract
         $flash = $this->getService('flash');
         $messages = $flash->getMessages();
         $params = ['id'=>$id];
+        $url = $this->container->settings['serverApi'][env('APP_ENV')]['server'];
+
         try {
             // $employee = $this->container->curl->post('http://serversl.local/api/user', $params);
-            $employee = $this->container->curl->post('http://serversl.local/api/employee', $params);
+            $employee = $this->container->curl->post($url.'/employee', $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[EmployeeController::getById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
