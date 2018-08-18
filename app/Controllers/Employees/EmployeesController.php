@@ -15,6 +15,7 @@ class EmployeesController extends ControllerAbstract
 
         parent::__construct($container);
         
+        
     }
 
     /**
@@ -30,11 +31,10 @@ class EmployeesController extends ControllerAbstract
         $flash = $this->getService('flash');
         $messages = $flash->getMessages();
         $params = ['id'=>$id];
-        $url = $this->container->settings['serverApi'][env('APP_ENV')]['server'];
+        // $url = $this->container->settings['serverApi'][env('APP_ENV')]['server'];
 
         try {
-            // $employee = $this->container->curl->post('http://serversl.local/api/user', $params);
-            $employee = $this->container->curl->post($url.'/employee', $params);
+            $employee = $this->container->curl->post($this->url . '/employee', $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[EmployeeController::getById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
@@ -84,7 +84,7 @@ class EmployeesController extends ControllerAbstract
         $params = ['id'=>$id];
         
         try {
-            $user = $this->container->curl->post('http://serversl.local/api/employee', $params);
+            $user = $this->container->curl->post($this->url . '/employee', $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[UserController::getUserById}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
@@ -144,7 +144,7 @@ class EmployeesController extends ControllerAbstract
     
     public function create(){
 
-        $url = 'http://clientsl.local/api/employees/create';
+        // $url = 'http://clientsl.local/api/employees/create';
         $request = $this->getRequest();
         $response = $this->getResponse();
         $router = $this->getRouter();
@@ -160,7 +160,7 @@ class EmployeesController extends ControllerAbstract
 
 
         try {
-            $resp = $this->container->curl->post($url, $params);
+            $resp = $this->container->curl->post($this->url . '/employees/create', $params);
             dd ([$url,$resp]);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[EmployeeController::getEdit}", [$ex->getMessage(), $ex->getCode()]);
@@ -181,7 +181,7 @@ class EmployeesController extends ControllerAbstract
         $employee = $request->getParam('employee');
         $params = [];
         try {
-            $employee = $this->container->curl->post('http://serversl.local/api/employee?id='.$id, $params);
+            $employee = $this->container->curl->post($this->url . '/employee?id='.$id, $params);
         } catch (\RuntimeException $ex) {
             $this->container->logger->critical("[EmployeeController::getEdit}", [$ex->getMessage(), $ex->getCode()]);
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
@@ -219,7 +219,7 @@ class EmployeesController extends ControllerAbstract
             // dump($employee);die;
 
             try {
-                $employee = $this->container->curl->post('http://serversl.local/api/employees/save/'.$id, $_POST);
+                $employee = $this->container->curl->post($this->url . '/employees/save/'.$id, $_POST);
             } catch (\RuntimeException $ex) {
                 $this->container->logger->critical("[EmployeeController::getEdit}", [$ex->getMessage(), $ex->getCode()]);
                 // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
@@ -250,7 +250,8 @@ class EmployeesController extends ControllerAbstract
             'title' => $this->title,
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
-            'messages' => $messages
+            'messages' => $messages,
+            'urlApi' => $this->container->settings['serverApi'][getenv('APP_ENV')]['serverAjax'],
             ]);
     }
 

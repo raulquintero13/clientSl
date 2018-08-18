@@ -14,6 +14,7 @@ abstract class ControllerAbstract
      * @var ContainerInterface
      */
     protected $container;
+    protected $url;
 
 
     /**
@@ -24,8 +25,10 @@ abstract class ControllerAbstract
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+        $this->url = $this->container->settings['serverApi'][env('APP_ENV')]['server'];
 
         unset($container);
+
     }
 
 

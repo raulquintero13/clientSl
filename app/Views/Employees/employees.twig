@@ -32,7 +32,7 @@ https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js #}
             "processing": false,
             "serverSide": true,
             "ajax": {
-                url: 'http://clientsl.local/api/employees',
+                url: '{{ urlApi }}/api/employees',
                 dataSrc: 'data'
             },
             "language": {
@@ -41,7 +41,7 @@ https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js #}
                 "sLengthMenu":     "Mostrar _MENU_ registros",
                 "ZeroRecords":    "No se encontraron resultados",
                 "EmptyTable":     "Ningún dato disponible en esta tabla",
-                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros Activos",
                 "InfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
                 "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
                 "sInfoPostFix":    "",
