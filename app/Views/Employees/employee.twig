@@ -84,6 +84,8 @@
                 {# <button class="btn btn-default" id="back"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>&nbsp;Regresar a Lista de Empleados</button>   #}
                 <button class="btn btn-default" id="back">
                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;List of Assocciates</button>
+                <button class="btn btn-default" id="print">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;New</button>
                 {% if readonly %}
                 <button class="btn btn-default" id="print">
                     <span class="glyphicon glyphicon-print" aria-hidden="true"></span>&nbsp;Print</button>
@@ -239,7 +241,7 @@
                     </div>
 
                     <div id="User" class="tabcontent">
-
+            
                         <div class="form-group row">
                             <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">User Status</label>
                             <div class="col-sm-9">
@@ -261,11 +263,16 @@
                             <div class="form-group row">
                                 <label for="textfield" class="col-sm-2  col-md-offset-1 col-form-label">Role</label>
                                 <div class="col-sm-9">
+                                {% if employee.user is null %}
+                                    Sin informacion
+                                {% else %}
+
                                     <select {{ readonly }} id="role_id" name="user[role_id]" class='form-control select2-me input-lg' style="width:250px;">
                                         {% for role in employee.roles %}
                                             <option value="{{ role.id }}" {% if employee.user.role_id == role.id %} selected="selected" {% endif %}>{{ role.role|ucwords }}</option>
                                         {% endfor %}
                                     </select>
+                                    {% endif %}
                                 </div>
                             </div>
 

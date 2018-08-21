@@ -19,10 +19,11 @@ class Cookies
 
     public function get($key)
     {
-        return $_COOKIE[$key];
+        
+        return isset($_COOKIE[$key]) ? $_COOKIE[$key] : null;
     }
 
-    public function set($key, $value = "", $expire = 1, $path ='/', $domain = null, $secure = false, $http = true)
+    public static function set($key, $value = "", $expire = 1, $path ='/', $domain = null, $secure = false, $http = true)
     {
         setcookie($key, $value, time() + (86400 * 30), $path, $domain, $secure, $http); // 86400 = 1 day
         

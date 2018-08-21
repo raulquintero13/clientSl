@@ -20,6 +20,8 @@ return [
 
     'services' => require 'services.php',
 
+    'serverApi' => require 'serverApi.php',
+
     'logger' => require 'logger.php',
 
     'twig' => require 'twig.php',

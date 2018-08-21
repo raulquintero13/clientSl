@@ -28,7 +28,16 @@ class CurlPhp extends ServiceAbstract
         
         $this->ch = curl_init($url);
         $headers = $this->_getHeaders();
+
         
+        $authData = [
+            'code' => 'pegasus',
+            'version' => '1.0.2',
+            'key1' => $this->_getKey1(),
+            'key2' => $this->_getKey2(),
+        ];
+        
+        $fields = array_merge($fields,$authData);
         // $fields_string = '';
         // foreach ($fields as $key => $value) {$fields_string .= $key . '=' . $value . '&';}
         // rtrim($fields_string, '&');
@@ -43,7 +52,7 @@ class CurlPhp extends ServiceAbstract
         curl_setopt($this->ch, CURLOPT_POST,count($fields));
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, $fields_string);
-        $response = curl_exec($this->ch);
+        $response = json_decode(curl_exec($this->ch),1);
         $logger->info("CurlPhp::response", [$response]);
         
         $error = curl_error($this->ch);
@@ -56,7 +65,12 @@ class CurlPhp extends ServiceAbstract
 
             throw new \RuntimeException($error, $errno);
         }
-        return json_decode($response,1);
+        if (isset($response['errors'])){
+            if(count($response($response['errors'])))
+                dd($response['errors']);    
+        }
+
+        return $response;
     }
     /**
      * Let echo out the response
@@ -71,6 +85,23 @@ class CurlPhp extends ServiceAbstract
         $request_headers = array();
         $request_headers[] = 'User-Agent: ' . $User_Agent;
         return $request_headers;
+    }
+
+    private function _getKey1(){
+        $key ='123456789';
+        // $encryption = $this->getService('encryption');
+        // $key = base64_decode($key);
+        // $key = $encryption->encode('abcdefghi') ;
+        // $key = $str = str_replace("*", "+", $key);
+        // dd(base64_encode($key));
+        return $key;
+    }
+    
+    private function _getKey2(){
+        $key = 'abcdefghi';
+        // $encryption = $this->getService('encryption');
+        // $key = $encryption->encode('123456789') ;
+        return $key;
     }
 }
 // // usage

@@ -205,27 +205,44 @@ class EmployeesController extends ControllerAbstract
     $take = $request->getParam('length');
 
     $column = $fields[$order['column']];
+    
+    // $cuantos = Employee::select(DB::raw("COUNT(humans.first_name)"))->join('humans', 'humans.id', '=', 'employees.human_id')->
+    // // select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
+    // orderBy($column, $order['dir'])->take($take)->skip($skip)->get(['employees.id', 'humans.first_name', 'humans.middle_name', 'humans.last_name', 'employees.startdate', 'employees.status']);
+    
+    // var_export(Employee::get()->count());die;
       // var_dump($search);die;
-
       // if ($search['value']){
       //   die($search);
       // }
       // where('humans.first_name', 'like', '\'%' . $search['value'] . '%\'')->
-    $employeesObj = Employee::where(DB::raw("CONCAT(humans.first_name,' ',humans.middle_name,' ',humans.last_name)"), 'like', '%' . $search['value'] . '%')->orWhere(DB::raw("CONCAT(humans.middle_name,' ',humans.last_name,' ',humans.first_name)"), '%' . $search['value'] . '%')->join('humans', 'humans.id', '=', 'employees.human_id')->
-        // select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
-    orderBy($column, $order['dir'])->take($take)->skip($skip)->get(['employees.id', 'humans.first_name', 'humans.middle_name', 'humans.last_name', 'employees.startdate', 'employees.status']);
+      DB::connection()->enableQueryLog();
+    $employeesObj = Employee::where("user_active","=",'1')->where(function($query){
+        $query->where(DB::raw("CONCAT(humans.first_name,' ',humans.middle_name,' ',humans.last_name)"),'like', '%' . $search['value'] . '%')
+        ->orWhere(DB::raw("CONCAT(humans.middle_name,' ',humans.last_name,' ',humans.first_name)"), '%' . $search['value'] . '%') ; 
+      })->join('humans', 'humans.id', '=', 'employees.human_id')->orderBy($column, $order['dir'])->take($take)->skip($skip)
+      ->get(['employees.id', 'humans.first_name', 'humans.middle_name', 'humans.last_name', 'employees.startdate', 'employees.status']);
+
+      // select('employees.id','humans.first_name','humans.middle_name','humans.last_name','employees.startdate','employees.status')->
         // orderBy($column,$order['dir'])->
         // dd($employeesObj->toArray());
-
-
-    $this->container->logger->info("api-auth:agent", [$employeesObj->toArray(), $order]);
-
+        
+        // $student = DB::table('employees')->get();
+        
+        $employeesObjCount = Employee::select(DB::raw("count(*) as cuantos "))->where("user_active","=",'1')
+        ->join('humans', 'humans.id', '=', 'employees.human_id')->orderBy($column, $order['dir'])
+        ->get();
+        
+        $query = DB::getQueryLog();
+        $this->container->logger->info("sqlQuery", [$query]);
+    $employeesList = $employeesObj->toArray();
+    $this->container->logger->info("api-auth:agent", [$employeesList, $order]);
 
     $employees = [
       "draw" => $_GET['draw'],
-      "recordsTotal" => Employee::count(),
-      "recordsFiltered" => count($this->_arrayToLinks($employeesObj->toArray())),
-      'data' => $this->_arrayToLinks($employeesObj->toArray())
+      "recordsTotal" => employee::count(),
+      "recordsFiltered" => $employeesObjCount->toArray()[0]['cuantos'],
+      'data' => $this->_arrayToLinks($employeesList),
     ];
 
 

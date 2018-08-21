@@ -40,6 +40,9 @@ class AuthMiddleware extends MiddlewareAbstract
             case '/auth':
                 $isPublic = true;
                 break;
+            case '/api/employees/save':
+                $isPublic = true;
+                break;
             case '/api/employees/create':
                 $isPublic = true;
                 break;

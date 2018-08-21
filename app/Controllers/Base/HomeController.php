@@ -1,6 +1,7 @@
 <?php namespace App\Controllers\Base;
 
 use Core\Kernel\ControllerAbstract;
+use Tracy\Debugger;
 
 class HomeController extends ControllerAbstract
 {
@@ -36,8 +37,11 @@ class HomeController extends ControllerAbstract
         $environment = [
             'environment' => env('APP_ENV'),
             'client_name' => env('HTTP_CLIENT_NAME'),
+            'app_role' => env('APP_ROLE'),
             'debug' => env('APP_DEBUG'),
+            'env' => $_ENV["SLIM_MODE"],
         ];
+        // Debugger::dump($environment);
 
         $flash = $this->getService('flash');
         // $this->container->logger->info("HomeController",[1,23]);
