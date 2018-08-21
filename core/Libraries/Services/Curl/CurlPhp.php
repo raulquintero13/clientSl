@@ -65,8 +65,9 @@ class CurlPhp extends ServiceAbstract
 
             throw new \RuntimeException($error, $errno);
         }
-        if (count($response['errors'])){
-            dd($response['errors']);
+        if (isset($response['errors'])){
+            if(count($response($response['errors'])))
+                dd($response['errors']);    
         }
 
         return $response;

@@ -187,7 +187,8 @@ class EmployeesController extends ControllerAbstract
             // die(sprintf('Http error %s with code %d', $ex->getMessage(), $ex->getCode()));
         }
 
-        $flash->addMessage('edited','El Registro de '.strtoupper( $user['firstname']).' fue actualizado.');
+        // if (isset($user['firstname']))
+            $flash->addMessage('edited','El Registro de '.strtoupper( $employee['human']['first_name']).' fue actualizado.');
         
         $message_error = [];
         $readonly = '';     //// null or readonly
@@ -197,7 +198,7 @@ class EmployeesController extends ControllerAbstract
         $employee['startdate'] = str_replace(" ","T",$employee['startdate']);
 
         return $this->render('Employees/employee.twig', [
-            'title' => 'Employee: '.$user['firstname'].' '.$user['lastname'],
+            'title' => 'Employee: '.$employee['human']['first_name'].' '.$employee['human']['last_name'],
             'menuActive' => $this->menuActive,
             'userLogged' => $this->container->cookies->get('user'),
             'id' => $id,

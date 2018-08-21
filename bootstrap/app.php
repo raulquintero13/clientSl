@@ -2,15 +2,16 @@
 
 use \Core\Kernel\App;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Tracy\Debugger;
 
 define('DS', DIRECTORY_SEPARATOR);
 define('STORAGE_PATH', realpath(__DIR__.'/storage/').DS);
-
+Debugger::enable(Debugger::DEVELOPMENT);
 require 'kernel.php';
 
 session_start();
 
-$app = new App(['settings' => require config_path() . '/app.php']);
+$app = new App(['settings' => require config_path() . '/app.php','mode' => 'production']);
 
 
 // // database
