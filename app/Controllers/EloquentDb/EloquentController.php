@@ -6,9 +6,8 @@ class Eloquentcontroller {
 
     public function eloquentAction(){
 
-        $person= Person::find(1);
-
-     
+        $person= Human::find(1);
+        
         if($person->employee) {
             if ($person->employee->user) {
                 if($person->employee->user->role)
@@ -24,7 +23,7 @@ class Eloquentcontroller {
         //
        
         if($person->employee) {
-            $person->employee->active= 0;
+            $person->employee->user_active= 0;
             $person->employee->save();
         }
        
@@ -39,7 +38,7 @@ class Eloquentcontroller {
         //******************************** */
 
 
-        $person= Person::find(1);
+        $person= Human::find(1);
 
      
         if($person->employee) {
@@ -63,11 +62,11 @@ class Eloquentcontroller {
 
 
 
-class Person extends \Illuminate\Database\Eloquent\Model {
+class Human extends \Illuminate\Database\Eloquent\Model {
 
     public $timestamps = false;
     public function employee(){
-        return $this->hasOne(Employee::class,'people_id');
+        return $this->hasOne(Employee::class,'human_id');
     }
 }
 
@@ -75,7 +74,7 @@ class Employee extends \Illuminate\Database\Eloquent\Model {
 
     public $timestamps = false;
     public function person(){
-        return $this->belongsTo(Person::class);
+        return $this->belongsTo(Human::class);
     }
     public function user(){
         return $this->hasOne(User::class);
@@ -99,9 +98,9 @@ class Role extends \Illuminate\Database\Eloquent\Model {
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function  rights(){
-        return $this->hasMany(Rights::class);
-    }
+    // public function  rights(){
+    //     return $this->hasMany(Rights::class);
+    // }
 }
 
 class Rights extends \Illuminate\Database\Eloquent\Model {}

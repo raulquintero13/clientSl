@@ -43,6 +43,7 @@ class TwigViewService implements ServiceInterface
             $view->getEnvironment()->addGlobal('currentUri',$container->get('request')->getUri()->getPath());
 
             $cookies = $container->cookies;
+            
             $view->getEnvironment()->addGlobal('userLogged1',$cookies->get('user'));
 
             
